@@ -11,86 +11,16 @@
 
     <link rel="stylesheet" href="css/default.css" />
     <link rel="stylesheet" href="css/home.css" />
-
-    <style>
-      /* Main Section */
-
-      main h1 {
-        text-align: center;
-        font-size: 2.5rem;
-        color: #ab7b5d;
-        margin-bottom: 1rem;
-      }
-      main p {
-        text-align: center;
-        font-size: 1.1rem;
-        color: #666;
-        margin-bottom: 2rem;
-        margin: auto;
-      }
-
-      /* Filter Buttons */
-      .filter-button-wrapper {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 2rem;
-      }
-      .filter-button-wrapper button {
-        background-color: #ab7b5d;
-        color: #fff;
-        padding: 0.5rem 1rem;
-        margin: 0 0.5rem;
-        border: none;
-        border-radius: 20px;
-        cursor: pointer;
-        font-weight: 500;
-        transition: background-color 0.3s ease;
-      }
-      .filter-button-wrapper button:hover {
-        background-color: #ab7b5d;
-      }
-
-      /* Product Cards */
-      .product-wrapper {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1rem;
-      }
-      .product {
-        background-color: #fff;
-        padding: 3rem 1.5rem;
-        border-radius: 10px;
-
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        transition: transform 0.3s ease;
-      }
-
-      .product h2 {
-        font-size: 1.25rem;
-        margin-bottom: 0.5rem;
-        color: #333;
-      }
-      .product img {
-        width: 350px;
-        height: auto;
-        margin-bottom: 1rem;
-      }
-      .product .order {
-        display: inline-block;
-        text-decoration: none;
-        background-color: #ab7b5d;
-        color: #fff;
-        padding: 0.5rem 1.5rem;
-        border-radius: 20px;
-        font-weight: 500;
-        transition: background-color 0.3s ease;
-      }
-      .product .order:hover {
-        background-color: #84593e;
-      }
-    </style>
   </head>
+
+  <style>
+    .cart {
+      position: relative;
+      color: #333;
+      font-weight: bold;
+    }
+  </style>
+
   <body>
     <!-- nav start -->
 
@@ -105,7 +35,9 @@
           <li><a href="kontak.html">Contact</a></li>
         </ul>
         <div class="cart">
-          <img src="images/cart.png" alt="cart" />
+          <a href="cart.html">
+            <img src="images/cart.png" alt="cart" />
+          </a>
         </div>
       </div>
     </nav>
@@ -125,191 +57,224 @@
           menjamin kualitas dan kelezatan dalam setiap taburan.
         </p>
 
-        <div class="filter-button-wrapper" style="margin: 2rem 0">
+        <!-- <div class="filter-button-wrapper" style="margin: 2rem 0">
           <div class="container">
             <button class="all">All</button>
-            <button class="rempah-utuh">Rempah Utuh</button>
             <button class="rempah-bubuk">Rempah Bubuk</button>
+            <button class="rempah-utuh">Rempah Utuh</button>
             <button class="krupuk">Krupuk</button>
             <button class="herbal-jamu">Herbal & Jamu</button>
             <button class="bumbu-masak">Bumbu Masak</button>
           </div>
+        </div> -->
+
+        <div class="products">
+          <h2 class="products-title">Rempah Bubuk</h2>
+          <div class="product-wrapper">
+            <div
+              class="product"
+              data-id="1"
+              data-price="22500"
+              data-product="Bawang Putih Bubuk"
+            >
+              <h2>Bawang Putih Bubuk</h2>
+              <p class="harga">Rp 22.500</p>
+              <img
+                src="images/rempah-bubuk/bawang_putih_bubuk-removebg-preview.png"
+                alt="rempah bubuk 1"
+              />
+              <a
+                href="#"
+                class="order"
+                onclick="addToCart(1, 'Bawang Putih Bubuk', 22500)"
+                >Masukkan Keranjang</a
+              >
+            </div>
+            <div
+              class="product"
+              data-id="2"
+              data-price="15000"
+              data-product="Biji Pala"
+            >
+              <h2>Biji Pala</h2>
+              <p class="harga">Rp 15.000</p>
+              <img
+                src="images/rempah-bubuk/biji_pala_bubuk-removebg-preview.png"
+                alt="rempah bubuk 2"
+              />
+              <a
+                href="#"
+                class="order"
+                onclick="addToCart(2, 'Biji Pala', 15000)"
+                >Masukkan Keranjang</a
+              >
+            </div>
+            <div
+              class="product"
+              data-id="3"
+              data-price="15000"
+              data-product="Bunga Lawang"
+            >
+              <h2>Bunga Lawang</h2>
+              <p class="harga">Rp 15.000</p>
+              <img
+                src="images/rempah-bubuk/bunga_lawang_bubuk-removebg-preview.png"
+                alt="rempah bubuk 3"
+              />
+              <a
+                href="#"
+                class="order"
+                onclick="addToCart(3, 'Bunga Lawang', 15000)"
+                >Masukkan Keranjang</a
+              >
+            </div>
+            <div
+              class="product"
+              data-id="4"
+              data-price="12500"
+              data-product="Cengkeh Bubuk"
+            >
+              <h2>Cengkeh Bubuk</h2>
+              <p class="harga">Rp 12.500</p>
+              <img
+                src="images/rempah-bubuk/cengkeh_bubuk-removebg-preview.png"
+                alt="rempah bubuk 4"
+              />
+              <a
+                href="#"
+                class="order"
+                onclick="addToCart(4, 'Cengkeh Bubuk', 12500)"
+                >Masukkan Keranjang</a
+              >
+            </div>
+            <div
+              class="product"
+              data-id="5"
+              data-price="15000"
+              data-product="Kayu Manis"
+            >
+              <h2>Kayu Manis</h2>
+              <p class="harga">Rp 15.000</p>
+              <img
+                src="images/rempah-bubuk/kayu_manis_bubuk-removebg-preview.png"
+                alt="rempah bubuk 5"
+              />
+              <a
+                href="#"
+                class="order"
+                onclick="addToCart(5, 'Kayu Manis', 15000)"
+                >Masukkan Keranjang</a
+              >
+            </div>
+            <div
+              class="product"
+              data-id="6"
+              data-price="20000"
+              data-product="Kencur Bubuk"
+            >
+              <h2>Kencur Bubuk</h2>
+              <p class="harga">Rp 20.000</p>
+              <img
+                src="images/rempah-bubuk/kencur_bubuk-removebg-preview.png"
+                alt="rempah bubuk 6"
+              />
+              <a
+                href="#"
+                class="order"
+                onclick="addToCart(6, 'Kencur Bubuk', 20000)"
+                >Masukkan Keranjang</a
+              >
+            </div>
+            <div
+              class="product"
+              data-id="7"
+              data-price="11000"
+              data-product="Ketumbar Bubuk"
+            >
+              <h2>Ketumbar Bubuk</h2>
+              <p class="harga">Rp 11.000</p>
+              <img
+                src="images/rempah-bubuk/ketumbar_bubuk-removebg-preview.png"
+                alt="rempah bubuk 7"
+              />
+              <a
+                href="#"
+                class="order"
+                onclick="addToCart(7, 'Ketumbar Bubuk', 11000)"
+                >Masukkan Keranjang</a
+              >
+            </div>
+            <div
+              class="product"
+              data-id="8"
+              data-price="15000"
+              data-product="Kunyit Bubuk"
+            >
+              <h2>Kunyit Bubuk</h2>
+              <p class="harga">Rp 15.000</p>
+              <img
+                src="images/rempah-bubuk/kunyit_bubuk-removebg-preview.png"
+                alt="rempah bubuk 8"
+              />
+              <a
+                href="#"
+                class="order"
+                onclick="addToCart(8, 'Kunyit Bubuk', 15000)"
+                >Masukkan Keranjang</a
+              >
+            </div>
+            <div
+              class="product"
+              data-id="9"
+              data-price="20000"
+              data-product="Lada Putih Bubuk"
+            >
+              <h2>Lada Putih Bubuk</h2>
+              <p class="harga">Rp 20.000</p>
+              <img
+                src="images/rempah-bubuk/lada_putih_bubuk-removebg-preview.png"
+                alt="rempah bubuk 9"
+              />
+              <a
+                href="#"
+                class="order"
+                onclick="addToCart(9, 'Lada Putih Bubuk', 20000)"
+                >Masukkan Keranjang</a
+              >
+            </div>
+            <div
+              class="product"
+              data-id="10"
+              data-price="20000"
+              data-product="Lada Hitam Bubuk"
+            >
+              <h2>Lada Hitam Bubuk</h2>
+              <p class="harga">Rp 20.000</p>
+              <img
+                src="images/rempah-bubuk/lada_hitam_bubuk-removebg-preview.png"
+                alt="rempah bubuk 10"
+              />
+              <a
+                href="#"
+                class="order"
+                onclick="addToCart(10, 'Lada Hitam Bubuk', 20000)"
+                >Masukkan Keranjang</a
+              >
+            </div>
+          </div>
         </div>
 
-        <div class="product-wrapper">
-          <div class="product">
-            <h2>Bawang Putih Bubuk</h2>
-            <img
-              src="images/rempah-bubuk/bawang_putih_bubuk-removebg-preview.png"
-              alt=""
-            />
-            <a href="" class="order">Masukkan Keranjang</a>
-          </div>
-          <div class="product">
-            <h2>Bawang Putih Bubuk</h2>
-            <img
-              src="images/rempah-bubuk/bawang_putih_bubuk-removebg-preview.png"
-              alt=""
-            />
-            <a href="" class="order">Masukkan Keranjang</a>
-          </div>
-          <div class="product">
-            <h2>Bawang Putih Bubuk</h2>
-            <img
-              src="images/rempah-bubuk/bawang_putih_bubuk-removebg-preview.png"
-              alt=""
-            />
-            <a href="" class="order">Masukkan Keranjang</a>
-          </div>
-          <div class="product">
-            <h2>Bawang Putih Bubuk</h2>
+        <!-- rempah utuh -->
+        <div class="products"></div>
 
-            <img
-              src="images/rempah-bubuk/bawang_putih_bubuk-removebg-preview.png"
-              alt=""
-            />
-            <a href="" class="order">Masukkan Keranjang</a>
-          </div>
-          <div class="product">
-            <h2>Bawang Putih Bubuk</h2>
+        <!-- rempah utuh end -->
 
-            <img
-              src="images/rempah-bubuk/bawang_putih_bubuk-removebg-preview.png"
-              alt=""
-            />
-            <a href="" class="order">Masukkan Keranjang</a>
-          </div>
-          <div class="product">
-            <h2>Bawang Putih Bubuk</h2>
-
-            <img
-              src="images/rempah-bubuk/bawang_putih_bubuk-removebg-preview.png"
-              alt=""
-            />
-            <a href="" class="order">Masukkan Keranjang</a>
-          </div>
-          <div class="product">
-            <h2>Bawang Putih Bubuk</h2>
-
-            <img
-              src="images/rempah-bubuk/bawang_putih_bubuk-removebg-preview.png"
-              alt=""
-            />
-            <a href="" class="order">Masukkan Keranjang</a>
-          </div>
-          <div class="product">
-            <h2>Bawang Putih Bubuk</h2>
-            <img
-              src="images/rempah-bubuk/bawang_putih_bubuk-removebg-preview.png"
-              alt=""
-            />
-            <a href="" class="order">Masukkan Keranjang</a>
-          </div>
-          <div class="product">
-            <h2>Bawang Putih Bubuk</h2>
-            <img
-              src="images/rempah-bubuk/bawang_putih_bubuk-removebg-preview.png"
-              alt=""
-            />
-            <a href="" class="order">Masukkan Keranjang</a>
-          </div>
-          <div class="product">
-            <h2>Bawang Putih Bubuk</h2>
-            <img
-              src="images/rempah-bubuk/bawang_putih_bubuk-removebg-preview.png"
-              alt=""
-            />
-            <a href="" class="order">Masukkan Keranjang</a>
-          </div>
-          <div class="product">
-            <h2>Bawang Putih Bubuk</h2>
-            <img
-              src="images/rempah-bubuk/bawang_putih_bubuk-removebg-preview.png"
-              alt=""
-            />
-            <a href="" class="order">Masukkan Keranjang</a>
-          </div>
-          <div class="product">
-            <h2>Bawang Putih Bubuk</h2>
-            <img
-              src="images/rempah-bubuk/bawang_putih_bubuk-removebg-preview.png"
-              alt=""
-            />
-            <a href="" class="order">Masukkan Keranjang</a>
-          </div>
-          <div class="product">
-            <h2>Bawang Putih Bubuk</h2>
-            <img
-              src="images/rempah-bubuk/bawang_putih_bubuk-removebg-preview.png"
-              alt=""
-            />
-            <a href="" class="order">Masukkan Keranjang</a>
-          </div>
-          <div class="product">
-            <h2>Bawang Putih Bubuk</h2>
-            <img
-              src="images/rempah-bubuk/bawang_putih_bubuk-removebg-preview.png"
-              alt=""
-            />
-            <a href="" class="order">Masukkan Keranjang</a>
-          </div>
-          <div class="product">
-            <h2>Bawang Putih Bubuk</h2>
-            <img
-              src="images/rempah-bubuk/bawang_putih_bubuk-removebg-preview.png"
-              alt=""
-            />
-            <a href="" class="order">Masukkan Keranjang</a>
-          </div>
-          <div class="product">
-            <h2>Bawang Putih Bubuk</h2>
-            <img
-              src="images/rempah-bubuk/bawang_putih_bubuk-removebg-preview.png"
-              alt=""
-            />
-            <a href="" class="order">Masukkan Keranjang</a>
-          </div>
-          <div class="product">
-            <h2>Bawang Putih Bubuk</h2>
-            <img
-              src="images/rempah-bubuk/bawang_putih_bubuk-removebg-preview.png"
-              alt=""
-            />
-            <a href="" class="order">Masukkan Keranjang</a>
-          </div>
-          <div class="product">
-            <h2>Bawang Putih Bubuk</h2>
-            <img
-              src="images/rempah-bubuk/bawang_putih_bubuk-removebg-preview.png"
-              alt=""
-            />
-            <a href="" class="order">Masukkan Keranjang</a>
-          </div>
-          <div class="product">
-            <h2>Bawang Putih Bubuk</h2>
-            <img
-              src="images/rempah-bubuk/bawang_putih_bubuk-removebg-preview.png"
-              alt=""
-            />
-            <a href="" class="order">Masukkan Keranjang</a>
-          </div>
-          <div class="product">
-            <h2>Bawang Putih Bubuk</h2>
-            <img
-              src="images/rempah-bubuk/bawang_putih_bubuk-removebg-preview.png"
-              alt=""
-            />
-            <a href="" class="order">Masukkan Keranjang</a>
-          </div>
-          <div class="product">
-            <h2>Bawang Putih Bubuk</h2>
-            <img
-              src="images/rempah-bubuk/bawang_putih_bubuk-removebg-preview.png"
-              alt=""
-            />
-            <a href="" class="order">Masukkan Keranjang</a>
-          </div>
+        <!-- krupuk -->
+        <div class="products">
+          <h2 class="products-title">Krupuk</h2>
+          <div class="product-wrapper"></div>
         </div>
+        <!-- krupuk end -->
       </div>
     </main>
 
@@ -326,5 +291,7 @@
       >
     </footer>
     <!-- footer end -->
+
+    <script src="js/cart.js"></script>
   </body>
 </html>
