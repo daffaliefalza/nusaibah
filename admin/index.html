@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .wrapper {
+        border: 1px solid red;
+        height: 100vh;
+        display: grid;
+        /* Set grid template columns and rows to control layout structure */
+        grid-template-columns: 1fr 3fr 3fr 3fr;
+        grid-template-rows: auto 1fr 1fr auto;
+        grid-template-areas:
+          "aside top-bar top-bar top-bar"
+          "aside content content content"
+          "aside content content content"
+          "aside footer footer footer";
+      }
+
+      aside {
+        grid-area: aside;
+        border: 1px solid purple;
+      }
+
+      .top-bar {
+        grid-area: top-bar;
+        border: 1px solid yellow;
+      }
+
+      .content {
+        grid-area: content;
+        border: 1px solid black;
+      }
+
+      .footer {
+        grid-area: footer;
+        border: 1px solid goldenrod;
+      }
+
+      /* Optional: Make it responsive for smaller screens */
+      @media (max-width: 768px) {
+        .wrapper {
+          grid-template-columns: 1fr;
+          grid-template-rows: auto auto 1fr auto auto;
+          grid-template-areas:
+            "top-bar"
+            "content"
+            "aside"
+            "content"
+            "footer";
+        }
+
+        aside {
+          order: 2;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <aside>Aside</aside>
+      <div class="top-bar">Top Bar</div>
+      <div class="content">Content</div>
+      <div class="footer">Footer</div>
+    </div>
+  </body>
+</html>
