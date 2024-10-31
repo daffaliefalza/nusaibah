@@ -1,6 +1,6 @@
 /* Main Section */
 
-main h1 {
+.container h1 {
   text-align: center;
   font-size: 2.5rem;
   color: #ab7b5d;
@@ -79,4 +79,29 @@ main p {
 }
 .product .order:hover {
   background-color: #84593e;
+}
+
+@media (max-width: 768px) {
+  main {
+    margin-top: 5rem;
+  }
+  nav {
+    padding-bottom: 1rem;
+  }
+
+  nav .container {
+    flex-direction: column;
+  }
+
+  .product-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .product img {
+    width: 90%;
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 500px) {
 }
