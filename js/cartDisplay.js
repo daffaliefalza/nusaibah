@@ -88,3 +88,45 @@ function updateCartCount() {
 document.addEventListener("DOMContentLoaded", function () {
   renderCart();
 });
+
+// Function to format cart items into a WhatsApp message and open WhatsApp with pre-filled text
+function sendCartToWhatsApp() {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  if (cart.length === 0) {
+    alert("Keranjang Anda kosong!");
+    return;
+  }
+
+  let message = "Halo, saya ingin memesan:\n";
+  let totalAmount = 0;
+
+  cart.forEach((item) => {
+    const itemTotal = item.price * item.quantity;
+    totalAmount += itemTotal;
+    message += `- ${item.name} x${item.quantity} (Rp ${item.price} each): Rp ${itemTotal}\n`;
+  });
+
+  message += `\nTotal: Rp ${totalAmount}\n\nTerima kasih!`;
+
+  // Encode the message for the WhatsApp URL
+  const whatsappMessage = encodeURIComponent(message);
+
+  // WhatsApp URL with pre-filled message (replace phone number with your business's WhatsApp number)
+  const whatsappUrl = `https://wa.me/6281384166485?text=${whatsappMessage}`;
+
+  // Open WhatsApp
+  window.open(whatsappUrl, "_blank");
+
+  // Clear the cart after sending the message
+  localStorage.removeItem("cart");
+  renderCart(); // Refresh cart display
+  updateCartCount(); // Update cart count if displayed elsewhere
+}
+
+// Add a button on your cart page to trigger the WhatsApp order function
+document.addEventListener("DOMContentLoaded", function () {
+  const cartPageButton = document.createElement("button");
+  cartPageButton.innerText = "Pesan via WhatsApp";
+  cartPageButton.onclick = sendCartToWhatsApp;
+  document.body.appendChild(cartPageButton);
+});

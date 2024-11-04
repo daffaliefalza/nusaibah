@@ -33,7 +33,7 @@ function addToCart(id, name, price) {
 // Function to update the cart icon with the number of items
 function updateCartCount() {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const itemCount = cart.reduce((count, item) => count + item.quantity, 0);
+  const itemCount = cart.length; // Count of unique products in cart
 
   // Update the cart icon text with item count
   document.querySelector(".cart a").innerText = `Cart (${itemCount})`;
