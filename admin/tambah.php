@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result = mysqli_query($conn, $sql);
 
     if ($result) {
-        echo '<script>alert("Data produk berhasil ditambah."); window.location = "kelola-produk.php";</script>';
+        echo '<script>alert("Data produk berhasil ditambah."); window.location = "index.php";</script>';
     } else {
         echo '<script>alert("Gagal menambahkan data!");</script>';
     }
