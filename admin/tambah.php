@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $gambar = $_FILES['gambar']['name']; // Updated to handle file upload
     $image_tmp = $_FILES['gambar']['tmp_name']; // Temporary location of the file
     $harga = $_POST['harga'];
-    $desripsi = $_POST['deskripsi'];
+    $deskripsi = $_POST['deskripsi'];
     $stok = $_POST['stok'];
 
     $upload_directory = "upload/"; // Define the upload directory
@@ -77,13 +77,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             box-sizing: border-box;
             margin-bottom: 10px;
         }
+
+        .back {
+            font-size: 2.4rem;
+        }
     </style>
 
 </head>
 
 <body>
 
-    <!-- <a href="./index.php" class="back">Kembali</a> -->
+    <a href="./index.php" class="back">
+        ⇐ Kembali</a>
 
     <h1 style="text-align: center;">Tambah Data Produk</h1>
 
@@ -114,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <label for="deskripsi">Deskripsi</label>
         <br>
-        <textarea name="deskripsi" id="deskripsi" cols="30" rows="10"></textarea>
+        <textarea name="deskripsi" id="deskripsi" cols="30" rows="10" required></textarea>
         <br>
 
         <label for="stok">Stok</label>

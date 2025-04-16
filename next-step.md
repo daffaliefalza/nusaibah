@@ -4,5 +4,6 @@
 
 <!-- Todo -->
 
-1. Management Stok Front to back (Di depan gak usah tampilin stok quantity, tapi tersedia / stok habis)
-2. Fixing CSS
+1. Fixing admin
+2. Management Stok Front to back (Di depan gak usah tampilin stok quantity, tapi tersedia / stok habis)
+3. Fixing CSS

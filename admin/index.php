@@ -1,11 +1,9 @@
-<?php
-session_start();
+<?php include '../config.php'; ?>
+<?php include 'auth.php'; ?>
 
-require('../config.php');
-if (!isset($_SESSION["admin_logged_in"])) {
-  header("Location: login.php");
-  exit;
-}
+
+<?php
+
 
 
 if (isset($_GET['search'])) {
