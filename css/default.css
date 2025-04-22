@@ -7,6 +7,7 @@
 :root {
   --orange-text: #dfb665;
   --dark-text: #434343;
+  --dark: #2c3e50;
 }
 
 *,
@@ -51,4 +52,95 @@ html {
 
 h1 {
   font-family: "prata", "sans-serif";
+}
+
+nav {
+  background-color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 0.8rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Footer */
+footer {
+  background-color: var(--dark);
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 50px;
+}
+
+footer a {
+  color: var(--primary-light);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+footer a:hover {
+  color: white;
+}
+
+nav .container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo img {
+  width: 80px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  padding: 6px 12px;
+  transition: all 0.3s ease;
+  border-radius: 6px;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  background-color: #f0f0f0;
+  color: #e74c3c;
+}
+
+.cart {
+  position: relative;
+}
+
+.cart a {
+  text-decoration: none;
+  position: relative;
+}
+
+.cart img {
+  width: 28px;
+  height: auto;
+}
+
+#cart-count {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background-color: #ff4757;
+  color: white;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 50%;
+  font-weight: bold;
 }

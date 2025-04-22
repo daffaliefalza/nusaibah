@@ -4,6 +4,11 @@
 
 <!-- Todo -->
 
-1. Fixing admin
+1. Fixing admin V
 2. Management Stok Front to back (Di depan gak usah tampilin stok quantity, tapi tersedia / stok habis)
-3. Fixing CSS
+3. Fixing CSS V
+4. Fixing login & register css V
+5. Fixing search product admin
+6. Umpetin Register.php
+7. Fixing Cart V
+8. Kategori liat griya jamoe (bumbu, rempah, jamu)

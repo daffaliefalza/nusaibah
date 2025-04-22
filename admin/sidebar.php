@@ -57,7 +57,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
 <aside class="sidebar">
     <div class="sidebar-header">
-        <img src="../img/logo.png" alt="logo griya jamoe" />
+        <img src="../images/logo.jpg" alt="logo nusaibah" />
     </div>
     <div class="sidebar-content">
         <ul>

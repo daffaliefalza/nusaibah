@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Your Shopping Cart | Nusaibah</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/default.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --primary: #27ae60;
+      --primary-dark: #2ecc71;
+      --secondary: #f39c12;
+      --dark: #2c3e50;
+      --light: #ecf0f1;
+      --gray: #95a5a6;
+      --danger: #e74c3c;
+      --border-radius: 8px;
+      --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+      padding: 0;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .cart-header {
+      text-align: center;
+      margin: 30px 0;
+    }
+
+    .cart-header h1 {
+      color: var(--dark);
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+    }
+
+    .cart-header p {
+      color: var(--gray);
+    }
+
+    .cart-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .cart-items {
+      flex: 1;
+      min-width: 300px;
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      padding: 25px;
+    }
+
+    .cart-summary {
+      width: 300px;
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      padding: 25px;
+      align-self: flex-start;
+    }
+
+    .cart-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .cart-table thead th {
+      text-align: left;
+      padding: 12px 10px;
+      border-bottom: 2px solid var(--light);
+      color: var(--dark);
+      font-weight: 600;
+    }
+
+    .cart-table tbody td {
+      padding: 20px 10px;
+      border-bottom: 1px solid var(--light);
+      vertical-align: middle;
+    }
+
+    .product-cell {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .product-image {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      border-radius: 4px;
+      border: 1px solid #eee;
+    }
+
+    .product-info h3 {
+      margin: 0 0 5px 0;
+      font-size: 1rem;
+      color: var(--dark);
+    }
+
+    .product-info p {
+      margin: 0;
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .quantity-btn {
+      width: 30px;
+      height: 30px;
+      border: 1px solid #ddd;
+      background: white;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+
+    .quantity-btn:hover {
+      background: #f5f5f5;
+    }
+
+    .quantity-input {
+      width: 50px;
+      text-align: center;
+      padding: 5px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    .remove-btn {
+      color: var(--danger);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2rem;
+      padding: 5px;
+    }
+
+    .remove-btn:hover {
+      color: #c0392b;
+    }
+
+    .price {
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    .summary-title {
+      font-size: 1.2rem;
+      color: var(--dark);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--light);
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+    }
+
+    .summary-row.total {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px solid var(--light);
+    }
+
+    .checkout-btn {
+      width: 100%;
+      padding: 15px;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      border-radius: var(--border-radius);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background-color 0.3s;
+    }
+
+    .checkout-btn:hover {
+      background-color: var(--primary-dark);
+    }
+
+    .continue-btn {
+      display: inline-block;
+      margin-top: 20px;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .continue-btn:hover {
+      text-decoration: underline;
+    }
+
+    .empty-cart {
+      text-align: center;
+      padding: 50px 0;
+    }
+
+    .empty-cart i {
+      font-size: 3rem;
+      color: var(--gray);
+      margin-bottom: 20px;
+    }
+
+    .empty-cart h2 {
+      color: var(--dark);
+      margin-bottom: 15px;
+    }
+
+    .empty-cart p {
+      color: var(--gray);
+      margin-bottom: 25px;
+    }
+
+    .action-btns {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .btn {
+      padding: 12px 20px;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn-danger {
+      background-color: var(--danger);
+      color: white;
+      border: none;
+    }
+
+    .btn-danger:hover {
+      background-color: #c0392b;
+    }
+
+    .btn-outline {
+      background-color: white;
+      color: var(--dark);
+      border: 1px solid var(--gray);
+    }
+
+    .btn-outline:hover {
+      background-color: #f5f5f5;
+    }
+
+    @media (max-width: 768px) {
+      .cart-container {
+        flex-direction: column;
+      }
+
+      .cart-summary {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="cart-header">
+      <h1>Your Shopping Cart</h1>
+      <p>Review and manage your items before checkout</p>
+    </div>
+
+    <div class="cart-container">
+      <div class="cart-items">
+        <table class="cart-table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Subtotal</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="cartItems">
+            <!-- Cart items will be inserted here by JavaScript -->
+          </tbody>
+        </table>
+
+        <div id="emptyCart" class="empty-cart" style="display: none;">
+          <i class="fas fa-shopping-cart"></i>
+          <h2>Your cart is empty</h2>
+          <p>Looks like you haven't added any items to your cart yet.</p>
+          <a href="index.php" class="continue-btn">
+            <i class="fas fa-arrow-left"></i> Continue Shopping
+          </a>
+        </div>
+
+        <div class="action-btns">
+          <a href="index.php" class="btn btn-outline">
+            <i class="fas fa-arrow-left"></i> Continue Shopping
+          </a>
+          <button onclick="clearCart()" class="btn btn-danger">
+            <i class="fas fa-trash"></i> Clear Cart
+          </button>
+        </div>
+      </div>
+
+      <div class="cart-summary">
+        <h3 class="summary-title">Order Summary</h3>
+        <!-- <div class="summary-row">
+          <span>Subtotal</span>
+          <span id="subtotalAmount">Rp 0</span>
+        </div> -->
+        <div class="summary-row">
+          <span>Shipping</span>
+          <span>Free</span>
+        </div>
+        <div class="summary-row">
+          <span>Tax</span>
+          <span>Rp 0</span>
+        </div>
+        <div class="summary-row total">
+          <span>Total</span>
+          <span id="totalAmount">Rp 0</span>
+        </div>
+        <button class="checkout-btn" onclick="proceedToCheckout()">
+          <i class="fas fa-lock"></i> Proceed to Checkout
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/cartDisplay.js"></script>
+  <script>
+    function proceedToCheckout() {
+      // Add your checkout logic here
+      alert('Proceeding to checkout!');
+    }
+  </script>
+</body>
+
+</html>

@@ -6,14 +6,6 @@ function addToCart(id, name, price) {
   // Check if item is already in the cart
   const productIndex = cart.findIndex((item) => item.id === id);
 
-  //   if (productIndex === -1) {
-  //     // If product is not in the cart, add it
-  //     cart.push({ id, name, price, quantity: 1 });
-  //   } else {
-  //     // If product exists in the cart, increase the quantity
-  //     cart[productIndex].quantity += 1;
-  //   }
-
   if (productIndex === -1) {
     // If product is not in the cart, add it
     cart.push({ id, name, price, quantity: 1 });
@@ -28,18 +20,21 @@ function addToCart(id, name, price) {
 
   // Update the cart icon counter
   updateCartCount();
+
+  // Show success message
+  alert(`${name}  ditambahkan ke keranjang`);
 }
 
 // Function to update the cart icon with the number of items
 function updateCartCount() {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const itemCount = cart.length; // Count of unique products in cart
+  const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
 
-  // Update the cart icon text with item count
-  document.querySelector(".cart a").innerText = `Cart (${itemCount})`;
+  // Update the cart count display
+  document.getElementById("cart-count").textContent = itemCount;
 }
 
 // Initialize cart count on page load
-window.onload = function () {
+document.addEventListener("DOMContentLoaded", function () {
   updateCartCount();
-};
+});

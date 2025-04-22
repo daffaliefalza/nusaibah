@@ -17,7 +17,27 @@ include 'config.php';
     <style>
         .cart {
             position: relative;
-            color: #333;
+            display: inline-block;
+        }
+
+        .cart-icon {
+            width: 30px;
+            height: 30px;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
             font-weight: bold;
         }
 
@@ -36,50 +56,53 @@ include 'config.php';
         }
 
         .produk-card img {
-            max-width: 100%;
-            height: 150px;
-            object-fit: contain;
+            width: 350px;
+            height: auto;
+            margin-bottom: 1rem;
         }
+
 
         .harga {
             font-weight: bold;
-            color: #e74c3c;
+            color: rgb(38, 43, 37);
             margin: 10px 0;
         }
 
         .order {
             display: inline-block;
-            background-color: #27ae60;
+            background-color: #ab7b5d;
             color: white;
             padding: 8px 15px;
             border-radius: 5px;
             text-decoration: none;
             margin-top: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
         }
 
         .order:hover {
-            background-color: #2ecc71;
+            background-color: rgb(71, 42, 23);
+
         }
     </style>
 </head>
 
 <body>
-
     <!-- nav start -->
-    <nav style="border: 1px solid red;">
+    <nav>
         <div class="container">
-            <a href="#" class="logo">
+            <a href="index.php" class="logo">
                 <img src="images/logo.jpg" alt="logo" style="width: 80px" />
             </a>
             <ul class="nav-links">
-                <li><a href="index.html" class="active">Produk</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="kontak.html">Contact</a></li>
+                <li><a href="#" class="active">Produk</a></li>
+                <li><a href="about.php">About</a></li>
+                <li><a href="kontak.php">Contact</a></li>
             </ul>
             <div class="cart">
-                <a href="cart.html">
-                    <img src="images/cart.png" alt="cart" />
-                    <span id="cart-count">0</span>
+                <a href="cart.php">
+                    <img src="images/cart.png" alt="cart" class="cart-icon" />
+                    <span class="cart-count" id="cart-count">0</span>
                 </a>
             </div>
         </div>
@@ -99,7 +122,7 @@ include 'config.php';
             </p>
 
             <h2>Daftar Produk</h2>
-            <div class="produk-list">
+            <div class="product-wrapper">
                 <?php
                 $result = $conn->query("SELECT * FROM produk");
 
@@ -108,10 +131,10 @@ include 'config.php';
                     <div class="produk-card">
                         <img src="admin/upload/<?= htmlspecialchars($row['gambar']) ?>" alt="<?= htmlspecialchars($row['nama_produk']) ?>">
                         <h3><?= htmlspecialchars($row['nama_produk']) ?></h3>
-                        <p>Kategori: <?= htmlspecialchars($row['kategori_produk']) ?></p>
+                        <!-- <p>Kategori: <?= htmlspecialchars($row['kategori_produk']) ?></p> -->
                         <p class="harga">Rp <?= number_format($row['harga'], 0, ',', '.') ?></p>
-                        <p><?= htmlspecialchars($row['deskripsi']) ?></p>
-                        <p>Stok: <?= htmlspecialchars($row['stok']) ?></p>
+                        <!-- <p><?= htmlspecialchars($row['deskripsi']) ?></p> -->
+                        <!-- <p>Stok: <?= htmlspecialchars($row['stok']) ?></p> -->
                         <a href="#" class="order" onclick="addToCart(<?= $row['id_produk'] ?>, '<?= htmlspecialchars(addslashes($row['nama_produk'])) ?>', <?= $row['harga'] ?>)">
                             Masukkan Keranjang
                         </a>

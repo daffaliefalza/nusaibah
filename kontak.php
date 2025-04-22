@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+
+  <link rel="stylesheet" href="css/default.css" />
+  <link rel="stylesheet" href="css/home.css" />
+
+  <style></style>
+</head>
+
+<body>
+  <!-- nav start -->
+
+  <nav>
+    <div class="container">
+      <a href="index.php" class="logo">
+        <img src="images/logo.jpg" alt="logo" style="width: 80px" />
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.php">Produk</a></li>
+        <li><a href="about.php">About</a></li>
+        <li><a href="kontak.php" class="active">Contact</a></li>
+      </ul>
+      <div class="cart">
+        <a href="cart.php">
+          <img src="images/cart.png" alt="cart" />
+          <span id="cart-count">0</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- nav end -->
+
+  <style>
+    .contact {
+      padding-top: 10rem;
+    }
+  </style>
+
+  <section class="contact">
+    <div class="container">
+      <h1>Temukan Kami</h1>
+      <p>
+        Produk kami tersebar di beberapa supermarket seperti hypermart
+        cikarang, bekasi, dan cifest.
+      </p>
+      <div class="maps">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.4572396480153!2d107.13438077366503!3d-6.334765893654863!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e699a57468f6be7%3A0x2f95aa17a0bf97d1!2sHypermart%20Lippo%20Cikarang!5e0!3m2!1sid!2sid!4v1730363099243!5m2!1sid!2sid"
+          height="450"
+          style="border: 0; width: 100%"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.3153983513585!2d106.61672717366375!3d-6.222077593765948!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69ff90350ff847%3A0xa0d31539b0cf0b6d!2sHypermart%20Cyberpark%20Imam%20bonjol!5e0!3m2!1sid!2sid!4v1730363220553!5m2!1sid!2sid"
+          height="450"
+          style="border: 0; width: 100%"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- footer start -->
+  <footer>
+    &copy; 2024 - Afiat Barokah Mandri | All rights reserved. Designed By
+    <a
+      style="text-decoration: underline; color: #fff"
+      href="https://webwirausahamuda.com"
+      target="_blank">Wimuda</a>
+  </footer>
+  <!-- footer end -->
+
+  <script src="js/cart.js"></script>
+
+</body>
+
+</html>

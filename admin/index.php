@@ -90,7 +90,7 @@ $result = mysqli_query($conn, $sql);
       </table>
     </main>
     <footer class="admin-footer">
-      Made with &hearts; - Andi Daffa Liefalza
+      &copy; Nusaibah 2025 - All Rights Reserved
     </footer>
   </div>
 </body>

@@ -1,8 +1,3 @@
-// Function to format the price with thousands separator
-function formatCurrency(amount) {
-  return amount.toLocaleString("id-ID"); // Format the number with Indonesian locale
-}
-
 // Function to render cart items on the cart page
 function renderCart() {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -18,13 +13,11 @@ function renderCart() {
     cartItems.innerHTML += `
       <tr>
         <td>${item.name}</td>
-        <td>Rp ${formatCurrency(item.price)}</td>
+        <td>Rp ${item.price}</td>
         <td>
-          <input type="number" value="${
-            item.quantity
-          }" min="1" onchange="updateQuantity(${index}, this.value)" />
+          <input type="number" value="${item.quantity}" min="1" onchange="updateQuantity(${index}, this.value)" />
         </td>
-        <td>Rp ${formatCurrency(totalItemPrice)}</td>
+        <td>Rp ${totalItemPrice}</td>
         <td>
           <button onclick="removeFromCart(${index})">Remove</button>
         </td>
@@ -32,9 +25,7 @@ function renderCart() {
     `;
   });
 
-  document.getElementById("totalAmount").innerText = `Rp ${formatCurrency(
-    totalAmount
-  )}`;
+  document.getElementById("totalAmount").innerText = `Rp ${totalAmount}`;
 }
 
 // Function to add a new item to the cart
@@ -112,19 +103,17 @@ function sendCartToWhatsApp() {
   cart.forEach((item) => {
     const itemTotal = item.price * item.quantity;
     totalAmount += itemTotal;
-    message += `- ${item.name} x${item.quantity} ( Rp ${formatCurrency(
-      item.price
-    )} per pcs ): Rp ${formatCurrency(itemTotal)}\n`;
+    message += `- ${item.name} x${item.quantity} ( Rp ${item.price} per pcs ): Rp ${itemTotal}\n`;
   });
 
-  message += `\nTotal: Rp ${formatCurrency(totalAmount)}\n\nTerima kasih!`;
+  message += `\nTotal: Rp ${totalAmount}\n\nTerima kasih!`;
 
   // Encode the message for the WhatsApp URL
   const whatsappMessage = encodeURIComponent(message);
 
   // WhatsApp URL with pre-filled message (replace phone number with your business's WhatsApp number)
-  // const whatsappUrl = `https://wa.me/6281213567170?text=${whatsappMessage}`;
-  const whatsappUrl = `https://wa.me/6281384166485?text=${whatsappMessage}`;
+  // const whatsappUrl = `https://wa.me/6281384166485?text=${whatsappMessage}`;
+  const whatsappUrl = `https://wa.me/6281213567170?text=${whatsappMessage}`;
 
   // Open WhatsApp
   window.open(whatsappUrl, "_blank");
