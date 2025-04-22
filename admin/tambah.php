@@ -101,8 +101,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <label for="kategori_produk">Kategori Produk</label>
         <br>
         <select name="kategori_produk" id="kategori_produk" required>
-            <option value="Jamu">Jamu</option>
-            <option value="Instan">Instan</option>
+            <option value="Bumbu">Bumbu</option>
+            <option value="Rempah">Rempah</option>
         </select>
         <br>
 

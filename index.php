@@ -1,5 +1,8 @@
 <?php
 include 'config.php';
+
+// Get the selected category from the URL parameter
+$category = isset($_GET['category']) ? $_GET['category'] : 'all';
 ?>
 
 <!DOCTYPE html>
@@ -61,7 +64,6 @@ include 'config.php';
             margin-bottom: 1rem;
         }
 
-
         .harga {
             font-weight: bold;
             color: rgb(38, 43, 37);
@@ -82,7 +84,47 @@ include 'config.php';
 
         .order:hover {
             background-color: rgb(71, 42, 23);
+        }
 
+        /* Filter buttons styling */
+        .filter-buttons {
+            display: flex;
+            gap: 12px;
+            margin: 20px 0 30px;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 10px 24px;
+            background-color: #f8f5f2;
+            color: #5a4a42;
+            border: 1px solid #d7ccc8;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .filter-btn:hover {
+            background-color: #e8dfd9;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-btn.active {
+            background-color: #ab7b5d;
+            color: white;
+            border-color: #ab7b5d;
+            box-shadow: 0 4px 8px rgba(171, 123, 93, 0.2);
+        }
+
+        .filter-btn.active:hover {
+            background-color: #8c634a;
+            transform: translateY(-1px);
         }
     </style>
 </head>
@@ -122,19 +164,30 @@ include 'config.php';
             </p>
 
             <h2>Daftar Produk</h2>
+
+            <!-- Filter buttons -->
+            <div class="filter-buttons">
+                <a href="?category=all" class="filter-btn <?= $category === 'all' ? 'active' : '' ?>">All Products</a>
+                <a href="?category=bumbu" class="filter-btn <?= $category === 'bumbu' ? 'active' : '' ?>">Bumbu</a>
+                <a href="?category=rempah" class="filter-btn <?= $category === 'rempah' ? 'active' : '' ?>">Rempah</a>
+            </div>
+
             <div class="product-wrapper">
                 <?php
-                $result = $conn->query("SELECT * FROM produk");
+                // Modify the query based on the selected category
+                $query = "SELECT * FROM produk";
+                if ($category !== 'all') {
+                    $query .= " WHERE kategori_produk = '" . $conn->real_escape_string($category) . "'";
+                }
+
+                $result = $conn->query($query);
 
                 while ($row = $result->fetch_assoc()) {
                 ?>
                     <div class="produk-card">
                         <img src="admin/upload/<?= htmlspecialchars($row['gambar']) ?>" alt="<?= htmlspecialchars($row['nama_produk']) ?>">
                         <h3><?= htmlspecialchars($row['nama_produk']) ?></h3>
-                        <!-- <p>Kategori: <?= htmlspecialchars($row['kategori_produk']) ?></p> -->
                         <p class="harga">Rp <?= number_format($row['harga'], 0, ',', '.') ?></p>
-                        <!-- <p><?= htmlspecialchars($row['deskripsi']) ?></p> -->
-                        <!-- <p>Stok: <?= htmlspecialchars($row['stok']) ?></p> -->
                         <a href="#" class="order" onclick="addToCart(<?= $row['id_produk'] ?>, '<?= htmlspecialchars(addslashes($row['nama_produk'])) ?>', <?= $row['harga'] ?>)">
                             Masukkan Keranjang
                         </a>
@@ -143,8 +196,6 @@ include 'config.php';
             </div>
         </div>
     </main>
-    <!-- main section end -->
-
     <!-- footer start -->
     <footer>
         &copy; 2024 - Afiat Barokah Mandri | All rights reserved. Designed By

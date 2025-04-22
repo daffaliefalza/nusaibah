@@ -11,4 +11,6 @@
 5. Fixing search product admin
 6. Umpetin Register.php
 7. Fixing Cart V
-8. Kategori liat griya jamoe (bumbu, rempah, jamu)
+8. Kategori liat griya jamoe (bumbu, rempah, jamu) V
+9. Tambahin Whatsapp icon fixed kanan
+10. Fixing contact page
