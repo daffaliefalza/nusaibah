@@ -8,7 +8,7 @@
 
 if (isset($_GET['search'])) {
   $search = $_GET['search'];
-  $sql = "SELECT * FROM produk WHERE product_name LIKE '%$search%' OR product_category LIKE '%$search%'";
+  $sql = "SELECT * FROM produk WHERE nama_produk LIKE '%$search%' OR kategori_produk LIKE '%$search%'";
 } else {
   $sql = "SELECT * FROM produk";
 }
