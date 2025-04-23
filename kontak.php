@@ -40,30 +40,59 @@
     .contact {
       padding-top: 10rem;
     }
+
+    .social-media-wrapper img {
+      width: 80px;
+    }
+
+    .social-media-wrapper a:first-child img {
+      background-color: #25D366;
+      border-radius: 50%;
+      padding: 14px;
+      box-shadow: 0px 0px 11px rgba(0, 0, 0, .5);
+    }
   </style>
 
   <section class="contact">
     <div class="container">
-      <h1>Temukan Kami</h1>
-      <p>
-        Produk kami tersebar di beberapa supermarket seperti hypermart
-        cikarang, bekasi, dan cifest.
-      </p>
-      <div class="maps">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.4572396480153!2d107.13438077366503!3d-6.334765893654863!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e699a57468f6be7%3A0x2f95aa17a0bf97d1!2sHypermart%20Lippo%20Cikarang!5e0!3m2!1sid!2sid!4v1730363099243!5m2!1sid!2sid"
-          height="450"
-          style="border: 0; width: 100%"
-          allowfullscreen=""
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"></iframe>
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.3153983513585!2d106.61672717366375!3d-6.222077593765948!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69ff90350ff847%3A0xa0d31539b0cf0b6d!2sHypermart%20Cyberpark%20Imam%20bonjol!5e0!3m2!1sid!2sid!4v1730363220553!5m2!1sid!2sid"
-          height="450"
-          style="border: 0; width: 100%"
-          allowfullscreen=""
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+      <div class="social-media-wrapper">
+        <h2 class="social-title">Social Media</h2>
+        <div class="social-icons">
+          <a href="https://wa.me/6281213567170?text=Halo admin, %20saya%20ingin%20bertanya"
+            target="_blank" class="social-icon">
+            <img src="images/whatsapp.svg" alt="WhatsApp">
+          </a>
+          <a href="https://www.instagram.com/nusaibah_herbs_spices/" target="_blank" class="social-icon">
+            <img src="images/instagram.svg" alt="Instagram">
+          </a>
+        </div>
+      </div>
+
+
+
+      <div class="temukan-kami-wrapper">
+        <h2>Temukan Kami</h2>
+        <p>
+          Produk kami tersebar di beberapa supermarket seperti hypermart
+          cikarang, bekasi, dan cifest.
+        </p>
+        <div class="maps">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.4572396480153!2d107.13438077366503!3d-6.334765893654863!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e699a57468f6be7%3A0x2f95aa17a0bf97d1!2sHypermart%20Lippo%20Cikarang!5e0!3m2!1sid!2sid!4v1730363099243!5m2!1sid!2sid"
+            height="450"
+            style="border: 0; width: 100%"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.3153983513585!2d106.61672717366375!3d-6.222077593765948!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69ff90350ff847%3A0xa0d31539b0cf0b6d!2sHypermart%20Cyberpark%20Imam%20bonjol!5e0!3m2!1sid!2sid!4v1730363220553!5m2!1sid!2sid"
+            height="450"
+            style="border: 0; width: 100%"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
       </div>
     </div>
   </section>
