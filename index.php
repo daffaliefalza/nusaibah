@@ -18,72 +18,110 @@ $category = isset($_GET['category']) ? $_GET['category'] : 'all';
     <link rel="stylesheet" href="css/home.css" />
 
     <style>
-        .cart {
-            position: relative;
-            display: inline-block;
-        }
-
-        .cart-icon {
-            width: 30px;
-            height: 30px;
-        }
-
-        .cart-count {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background-color: #e74c3c;
-            color: white;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: bold;
-        }
-
         .produk-list {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
             margin-top: 20px;
         }
 
         .produk-card {
-            border: 1px solid #ddd;
-            padding: 15px;
-            border-radius: 5px;
+            border: 1px solid #e8e8e8;
+            padding: 20px;
+            border-radius: 10px;
             text-align: center;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .produk-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
         }
 
         .produk-card img {
-            width: 350px;
-            height: auto;
+            width: 100%;
+            /* height: 250px; */
+            object-fit: cover;
             margin-bottom: 1rem;
+            border-radius: 8px;
         }
 
         .harga {
             font-weight: bold;
             color: rgb(38, 43, 37);
             margin: 10px 0;
+            font-size: 1.1rem;
         }
 
         .order {
             display: inline-block;
             background-color: #ab7b5d;
             color: white;
-            padding: 8px 15px;
-            border-radius: 5px;
+            padding: 10px 20px;
+            border-radius: 30px;
             text-decoration: none;
             margin-top: 10px;
             cursor: pointer;
             transition: all 0.3s;
+            border: none;
+            font-weight: 500;
+            width: 100%;
+            max-width: 200px;
         }
 
         .order:hover {
             background-color: rgb(71, 42, 23);
+            transform: translateY(-2px);
+        }
+
+        .order:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Stock status */
+        .stock-status {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .in-stock {
+            background-color: #2ecc71;
+            color: white;
+        }
+
+        .out-of-stock {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        /* Out of stock card styling */
+        .produk-card.out-of-stock-card {
+            opacity: 0.9;
+            background-color: rgb(221, 221, 221);
+        }
+
+        .produk-card.out-of-stock-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(233, 233, 233, 0.7);
+            z-index: 1;
         }
 
         /* Filter buttons styling */
@@ -92,6 +130,7 @@ $category = isset($_GET['category']) ? $_GET['category'] : 'all';
             gap: 12px;
             margin: 20px 0 30px;
             justify-content: center;
+            flex-wrap: wrap;
         }
 
         .filter-btn {
@@ -125,6 +164,33 @@ $category = isset($_GET['category']) ? $_GET['category'] : 'all';
         .filter-btn.active:hover {
             background-color: #8c634a;
             transform: translateY(-1px);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .produk-list {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 15px;
+            }
+
+            .filter-buttons {
+                gap: 8px;
+            }
+
+            .filter-btn {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .produk-list {
+                grid-template-columns: 1fr;
+            }
+
+            .produk-card {
+                padding: 15px;
+            }
         }
     </style>
 </head>
@@ -172,7 +238,7 @@ $category = isset($_GET['category']) ? $_GET['category'] : 'all';
                 <a href="?category=rempah" class="filter-btn <?= $category === 'rempah' ? 'active' : '' ?>">Rempah</a>
             </div>
 
-            <div class="product-wrapper">
+            <div class="produk-list">
                 <?php
                 // Modify the query based on the selected category
                 $query = "SELECT * FROM produk";
@@ -183,14 +249,22 @@ $category = isset($_GET['category']) ? $_GET['category'] : 'all';
                 $result = $conn->query($query);
 
                 while ($row = $result->fetch_assoc()) {
+                    $isOutOfStock = $row['stok'] <= 0;
                 ?>
-                    <div class="produk-card">
+                    <div class="produk-card <?= $isOutOfStock ? 'out-of-stock-card' : '' ?>">
+                        <div class="stock-status <?= $isOutOfStock ? 'out-of-stock' : 'in-stock' ?>">
+                            <?= $isOutOfStock ? 'Stok Habis' : 'Tersedia' ?>
+                        </div>
                         <img src="admin/upload/<?= htmlspecialchars($row['gambar']) ?>" alt="<?= htmlspecialchars($row['nama_produk']) ?>">
                         <h3><?= htmlspecialchars($row['nama_produk']) ?></h3>
                         <p class="harga">Rp <?= number_format($row['harga'], 0, ',', '.') ?></p>
-                        <a href="#" class="order" onclick="addToCart(<?= $row['id_produk'] ?>, '<?= htmlspecialchars(addslashes($row['nama_produk'])) ?>', <?= $row['harga'] ?>)">
-                            Masukkan Keranjang
-                        </a>
+                        <?php if ($isOutOfStock): ?>
+                            <button class="order" disabled>Stok Habis</button>
+                        <?php else: ?>
+                            <button class="order" onclick="addToCart(<?= $row['id_produk'] ?>, '<?= htmlspecialchars(addslashes($row['nama_produk'])) ?>', <?= $row['harga'] ?>)">
+                                Masukkan Keranjang
+                            </button>
+                        <?php endif; ?>
                     </div>
                 <?php } ?>
             </div>
@@ -203,17 +277,8 @@ $category = isset($_GET['category']) ? $_GET['category'] : 'all';
     </footer>
     <!-- footer end -->
 
-
-
-
-    <a
-        href="https://wa.me/6281213567170?text=Halo admin, %20saya%20ingin%20bertanya"
-        target="_blank">
-        <img
-            class="whatsapp-redirect"
-            src="images/whatsapp.svg"
-            alt="WhatsApp icon"
-            style="
+    <a href="https://wa.me/6281213567170?text=Halo admin, %20saya%20ingin%20bertanya" target="_blank">
+        <img class="whatsapp-redirect" src="images/whatsapp.svg" alt="WhatsApp icon" style="
           width: 65px;
           position: fixed;
           bottom: 2rem;
@@ -222,7 +287,6 @@ $category = isset($_GET['category']) ? $_GET['category'] : 'all';
           z-index: 50;
         " />
     </a>
-
 
     <script src="js/cart.js"></script>
     <script>

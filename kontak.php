@@ -38,7 +38,7 @@
 
   <style>
     .contact {
-      padding-top: 10rem;
+      padding-top: 2rem;
     }
 
     .social-media-wrapper img {
