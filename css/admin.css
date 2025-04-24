@@ -10,6 +10,7 @@
 /* Body styles */
 body {
   background-color: #f4f6f9;
+  overflow-x: auto;
 }
 
 /* Wrapper styles */
@@ -157,7 +158,6 @@ body {
 
 /* Footer styles */
 .admin-footer {
-  color: #333; /* Dark gray text color */
   text-align: center;
   padding: 20px;
   grid-area: footer;

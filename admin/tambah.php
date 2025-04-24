@@ -77,10 +77,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             box-sizing: border-box;
             margin-bottom: 10px;
         }
-
-        .back {
-            font-size: 2.4rem;
-        }
     </style>
 
 </head>
@@ -90,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <a href="./index.php" class="back">
         ⇐ Kembali</a>
 
-    <h1 style="text-align: center;">Tambah Data Produk</h1>
+    <h1 style=" text-align: center;">Tambah Data Produk</h1>
 
     <form action="" method="post" enctype="multipart/form-data"> <!-- enctype="multipart/form-data" is required for file uploads -->
         <label for="nama_produk">Nama Produk</label>
