@@ -1,56 +1,289 @@
 // Function to format the price with thousands separator
+// function formatCurrency(amount) {
+//   return amount.toLocaleString("id-ID"); // Format the number with Indonesian locale
+// }
+
+// // Function to calculate and update the total amount
+// function updateTotalAmount() {
+//   const cart = JSON.parse(localStorage.getItem("cart")) || [];
+//   let totalAmount = 0;
+
+//   cart.forEach((item) => {
+//     totalAmount += item.price * item.quantity;
+//   });
+
+//   document.getElementById("totalAmount").innerText = `Rp ${formatCurrency(
+//     totalAmount
+//   )}`;
+// }
+
+// // Function to render cart items on the cart page with proper styling
+// function renderCart() {
+//   const cart = JSON.parse(localStorage.getItem("cart")) || [];
+//   const cartItems = document.getElementById("cartItems");
+//   const emptyCart = document.getElementById("emptyCart");
+//   const shippingEstimate = document.getElementById("shippingEstimate"); // Add this line
+
+//   cartItems.innerHTML = ""; // Clear current items
+
+//   if (cart.length === 0) {
+//     emptyCart.style.display = "block";
+//     if (shippingEstimate) shippingEstimate.style.display = "none"; // Hide estimate
+//     updateTotalAmount(); // Update total when cart is empty
+//     return;
+//   }
+
+//   if (shippingEstimate) shippingEstimate.style.display = "block"; // Show estimate
+
+//   emptyCart.style.display = "none";
+
+//   cart.forEach((item, index) => {
+//     const totalItemPrice = item.price * item.quantity;
+
+//     cartItems.innerHTML += `
+//       <tr>
+//         <td>
+//           <div class="product-cell">
+
+//             <div class="product-info">
+//               <h3>${item.name}</h3>
+//               <p>${item.description || ""}</p>
+//             </div>
+//           </div>
+//         </td>
+//         <td class="price">Rp ${formatCurrency(item.price)}</td>
+//         <td>
+//           <div class="quantity-control">
+//             <button class="quantity-btn" onclick="updateQuantity(${index}, ${
+//       item.quantity - 1
+//     })">-</button>
+//             <input type="number" class="quantity-input" value="${
+//               item.quantity
+//             }" min="1"
+//                    onchange="updateQuantity(${index}, this.value)">
+//             <button class="quantity-btn" onclick="updateQuantity(${index}, ${
+//       item.quantity + 1
+//     })">+</button>
+//           </div>
+//         </td>
+//         <td class="price">Rp ${formatCurrency(totalItemPrice)}</td>
+//         <td>
+//           <button class="remove-btn" onclick="removeFromCart(${index})">
+//             <i class="fas fa-trash"></i>
+//           </button>
+//         </td>
+//       </tr>
+//     `;
+//   });
+
+//   updateTotalAmount(); // Update the total after rendering items
+// }
+
+// // Function to add a new item to the cart
+// function addToCart(item) {
+//   const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+//   // Check if item already exists in the cart
+//   const existingItemIndex = cart.findIndex(
+//     (cartItem) => cartItem.name === item.name
+//   );
+
+//   if (existingItemIndex >= 0) {
+//     // Update quantity if item exists
+//     cart[existingItemIndex].quantity += item.quantity;
+//   } else {
+//     // Add new item
+//     cart.push(item);
+//   }
+
+//   localStorage.setItem("cart", JSON.stringify(cart));
+//   renderCart();
+//   updateCartCount();
+// }
+
+// // Function to update item quantity in the cart
+// function updateQuantity(index, quantity) {
+//   let cart = JSON.parse(localStorage.getItem("cart"));
+//   if (quantity > 0) {
+//     cart[index].quantity = parseInt(quantity);
+//     localStorage.setItem("cart", JSON.stringify(cart));
+//     renderCart(); // This will call updateTotalAmount
+//     updateCartCount();
+//   }
+// }
+
+// // Function to remove an item from the cart
+// function removeFromCart(index) {
+//   let cart = JSON.parse(localStorage.getItem("cart"));
+//   cart.splice(index, 1);
+//   localStorage.setItem("cart", JSON.stringify(cart));
+//   renderCart();
+//   updateCartCount();
+//   updateTotalAmount(); // Explicitly update total
+// }
+
+// // Function to clear the entire cart
+// function clearCart() {
+//   localStorage.removeItem("cart");
+//   renderCart();
+//   updateCartCount();
+//   updateTotalAmount(); // Explicitly update total
+// }
+
+// // Function to display the count of items in the cart
+// function updateCartCount() {
+//   const cart = JSON.parse(localStorage.getItem("cart")) || [];
+//   let count = cart.reduce((total, item) => total + item.quantity, 0);
+//   // Update your cart icon count if you have one
+//   const cartCountElement = document.getElementById("cart-count");
+//   if (cartCountElement) {
+//     cartCountElement.innerText = count;
+//   }
+// }
+
+// // Function to format cart items into a WhatsApp message
+// function sendCartToWhatsApp() {
+//   const cart = JSON.parse(localStorage.getItem("cart")) || [];
+//   if (cart.length === 0) {
+//     alert("Keranjang Anda kosong!");
+//     return;
+//   }
+
+//   let message = "Halo, saya ingin memesan:\n\n";
+//   let totalAmount = 0;
+
+//   cart.forEach((item) => {
+//     const itemTotal = item.price * item.quantity;
+//     totalAmount += itemTotal;
+//     message += `*${item.name}*\n`; // Using asterisks for bold in WhatsApp
+//     message += `   Jumlah: ${item.quantity}\n`;
+//     message += `   Harga: Rp ${formatCurrency(item.price)}/pcs\n`;
+//     message += `   Subtotal: Rp ${formatCurrency(itemTotal)}\n\n`;
+//   });
+
+//   message += `TOTAL: Rp ${formatCurrency(totalAmount)}\n\n`;
+//   message += `Mohon konfirmasi ketersediaan barang dan total pembayaran. Terima kasih!`;
+
+//   // Encode the message for the WhatsApp URL
+//   const whatsappMessage = encodeURIComponent(message);
+//   const whatsappUrl = `https://wa.me/6281384166485?text=${whatsappMessage}`;
+
+//   // Open WhatsApp
+//   window.open(whatsappUrl, "_blank");
+
+//   setTimeout(() => {
+//     if (
+//       confirm(
+//         "Pesanan sudah terkirim via WhatsApp. Kosongkan keranjang sekarang?"
+//       )
+//     ) {
+//       localStorage.removeItem("cart");
+//       renderCart();
+//     }
+//   }, 1000); // Short delay to ensure WhatsApp opens
+
+//   // Optional: Clear the cart after sending
+//   // localStorage.removeItem("cart");
+//   // renderCart();
+// }
+
+// // Initialize cart display on page load
+// document.addEventListener("DOMContentLoaded", function () {
+//   renderCart();
+// });
+
+// Format price with thousands separator
 function formatCurrency(amount) {
-  return amount.toLocaleString("id-ID"); // Format the number with Indonesian locale
+  return amount.toLocaleString("id-ID");
 }
 
-// Function to render cart items on the cart page
-function renderCart() {
+// Calculate and update total amount
+function updateTotalAmount() {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const cartItems = document.getElementById("cartItems");
-  cartItems.innerHTML = ""; // Clear current items
-
-  let totalAmount = 0;
-
-  cart.forEach((item, index) => {
-    const totalItemPrice = item.price * item.quantity;
-    totalAmount += totalItemPrice;
-
-    cartItems.innerHTML += `
-      <tr>
-        <td>${item.name}</td>
-        <td>Rp ${formatCurrency(item.price)}</td>
-        <td>
-          <input type="number" value="${
-            item.quantity
-          }" min="1" onchange="updateQuantity(${index}, this.value)" />
-        </td>
-        <td>Rp ${formatCurrency(totalItemPrice)}</td>
-        <td>
-          <button onclick="removeFromCart(${index})">Remove</button>
-        </td>
-      </tr>
-    `;
-  });
-
+  const totalAmount = cart.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
   document.getElementById("totalAmount").innerText = `Rp ${formatCurrency(
     totalAmount
   )}`;
 }
 
-// Function to add a new item to the cart
+// Render cart items with proper styling
+function renderCart() {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const cartItems = document.getElementById("cartItems");
+  const emptyCart = document.getElementById("emptyCart");
+  const buttonClear = document.getElementById("button-clear");
+  const shippingEstimate = document.getElementById("shippingEstimate");
+
+  cartItems.innerHTML = "";
+
+  // Handle empty cart
+  if (cart.length === 0) {
+    emptyCart.style.display = "block";
+    if (shippingEstimate) shippingEstimate.style.display = "none";
+    if (buttonClear) buttonClear.style.display = "none";
+
+    updateTotalAmount();
+    return;
+  }
+
+  emptyCart.style.display = "none";
+  if (buttonClear) buttonClear.style.display = "block";
+  if (shippingEstimate) shippingEstimate.style.display = "block";
+
+  // Render each cart item
+  cart.forEach((item, index) => {
+    const totalItemPrice = item.price * item.quantity;
+    cartItems.innerHTML += `
+      <tr>
+        <td>
+          <div class="product-cell">
+            <div class="product-info">
+              <h3>${item.name}</h3>
+              <p>${item.description || ""}</p>
+            </div>
+          </div>
+        </td>
+        <td class="price">Rp ${formatCurrency(item.price)}</td>
+        <td>
+          <div class="quantity-control">
+            <button class="quantity-btn" onclick="updateQuantity(${index}, ${
+      item.quantity - 1
+    })">-</button>
+            <input type="number" class="quantity-input" value="${
+              item.quantity
+            }" min="1" 
+                   onchange="updateQuantity(${index}, this.value)">
+            <button class="quantity-btn" onclick="updateQuantity(${index}, ${
+      item.quantity + 1
+    })">+</button>
+          </div>
+        </td>
+        <td class="price">Rp ${formatCurrency(totalItemPrice)}</td>
+        <td>
+          <button class="remove-btn" onclick="removeFromCart(${index})">
+            <i class="fas fa-trash"></i>
+          </button>
+        </td>
+      </tr>
+    `;
+  });
+
+  updateTotalAmount();
+}
+
+// Add item to cart
 function addToCart(item) {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-  // Check if item already exists in the cart
   const existingItemIndex = cart.findIndex(
     (cartItem) => cartItem.name === item.name
   );
 
   if (existingItemIndex >= 0) {
-    // Update quantity if item exists
     cart[existingItemIndex].quantity += item.quantity;
   } else {
-    // Add new item
     cart.push(item);
   }
 
@@ -59,86 +292,135 @@ function addToCart(item) {
   updateCartCount();
 }
 
-// Function to update item quantity in the cart
+// Update item quantity
 function updateQuantity(index, quantity) {
-  let cart = JSON.parse(localStorage.getItem("cart"));
+  const cart = JSON.parse(localStorage.getItem("cart"));
   if (quantity > 0) {
     cart[index].quantity = parseInt(quantity);
     localStorage.setItem("cart", JSON.stringify(cart));
-    renderCart(); // Refresh cart display
-    updateCartCount(); // Update cart icon
+    renderCart();
+    updateCartCount();
   }
 }
 
-// Function to remove an item from the cart
+// Remove item from cart
 function removeFromCart(index) {
-  let cart = JSON.parse(localStorage.getItem("cart"));
+  const cart = JSON.parse(localStorage.getItem("cart"));
   cart.splice(index, 1);
   localStorage.setItem("cart", JSON.stringify(cart));
   renderCart();
   updateCartCount();
 }
 
-// Function to clear the entire cart
+// Clear entire cart
 function clearCart() {
-  localStorage.removeItem("cart");
-  renderCart();
-  updateCartCount();
+  if (confirm("Yakin ingin mengosongkan keranjang belanja?")) {
+    localStorage.removeItem("cart");
+    renderCart();
+    updateCartCount();
+  }
 }
 
-// Function to display the count of items in the cart (if you have a cart icon)
+// Update cart count indicator
 function updateCartCount() {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  let count = cart.reduce((total, item) => total + item.quantity, 0);
-  // Update your cart icon count if you have one, e.g., document.getElementById('cart-count').innerText = count;
+  const count = cart.reduce((total, item) => total + item.quantity, 0);
+  const cartCountElement = document.getElementById("cart-count");
+  if (cartCountElement) cartCountElement.innerText = count;
 }
 
-// Initialize cart display on page load
-document.addEventListener("DOMContentLoaded", function () {
-  renderCart();
-});
-
-// Function to format cart items into a WhatsApp message and open WhatsApp with pre-filled text
+// Send cart to WhatsApp with confirmation flow
 function sendCartToWhatsApp() {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   if (cart.length === 0) {
-    alert("Keranjang Anda kosong!");
+    alert("Keranjang kamu kosong!");
     return;
   }
 
-  let message = "Halo, saya ingin memesan:\n";
+  // Format WhatsApp message
+  let message = "Halo, saya ingin memesan:\n\n";
   let totalAmount = 0;
 
   cart.forEach((item) => {
     const itemTotal = item.price * item.quantity;
     totalAmount += itemTotal;
-    message += `- ${item.name} x${item.quantity} ( Rp ${formatCurrency(
-      item.price
-    )} per pcs ): Rp ${formatCurrency(itemTotal)}\n`;
+    message += `*${item.name}*\n`;
+    message += `   Jumlah: ${item.quantity}\n`;
+    message += `   Harga: Rp ${formatCurrency(item.price)}/pcs\n`;
+    message += `   Subtotal: Rp ${formatCurrency(itemTotal)}\n\n`;
   });
 
-  message += `\nTotal: Rp ${formatCurrency(totalAmount)}\n\nTerima kasih!`;
+  message += `*TOTAL: Rp ${formatCurrency(totalAmount)}*\n\n`;
+  message += `Mohon konfirmasi ketersediaan barang. Terima kasih!`;
 
-  // Encode the message for the WhatsApp URL
-  const whatsappMessage = encodeURIComponent(message);
-
-  // WhatsApp URL with pre-filled message (replace phone number with your business's WhatsApp number)
-  // const whatsappUrl = `https://wa.me/6281213567170?text=${whatsappMessage}`;
-  const whatsappUrl = `https://wa.me/6281384166485?text=${whatsappMessage}`;
+  // Store pending order
+  const orderId = Date.now();
+  localStorage.setItem(
+    "pendingOrder",
+    JSON.stringify({
+      id: orderId,
+      cart: [...cart],
+      timestamp: new Date().toISOString(),
+    })
+  );
 
   // Open WhatsApp
-  window.open(whatsappUrl, "_blank");
+  window.open(
+    `https://wa.me/6281384166485?text=${encodeURIComponent(message)}`,
+    "_blank"
+  );
 
-  // Clear the cart after sending the message
-  localStorage.removeItem("cart");
-  renderCart(); // Refresh cart display
-  updateCartCount(); // Update cart count if displayed elsewhere
+  // Setup confirmation flow
+  setupOrderConfirmation(orderId);
 }
 
-// Add a button on your cart page to trigger the WhatsApp order function
+// Handle order confirmation logic
+function setupOrderConfirmation(orderId) {
+  // Check if order was completed on return to site
+  window.addEventListener("focus", function onFocus() {
+    setTimeout(() => {
+      checkOrderCompletion(orderId);
+      window.removeEventListener("focus", onFocus);
+    }, 500);
+  });
+
+  // Periodic check (every 2 minutes)
+  const checkInterval = setInterval(() => {
+    checkOrderCompletion(orderId, () => clearInterval(checkInterval));
+  }, 120000);
+
+  // Final check after 30 minutes
+  setTimeout(() => {
+    clearInterval(checkInterval);
+    checkOrderCompletion(orderId);
+  }, 1800000);
+}
+
+function checkOrderCompletion(orderId, callback) {
+  const pendingOrder = JSON.parse(localStorage.getItem("pendingOrder"));
+  if (!pendingOrder || pendingOrder.id !== orderId) {
+    if (callback) callback();
+    return;
+  }
+
+  if (confirm("Kosongkan keranjang belanja?")) {
+    localStorage.removeItem("pendingOrder");
+    localStorage.removeItem("cart");
+    renderCart();
+  }
+  if (callback) callback();
+}
+
+// Initialize cart on page load
 document.addEventListener("DOMContentLoaded", function () {
-  const cartPageButton = document.createElement("button");
-  cartPageButton.innerText = "Pesan via WhatsApp";
-  cartPageButton.onclick = sendCartToWhatsApp;
-  document.body.appendChild(cartPageButton);
+  // Check for pending orders
+  const pendingOrder = JSON.parse(localStorage.getItem("pendingOrder"));
+  if (pendingOrder) {
+    if (confirm("Anda memiliki pesanan yang belum selesai. Lanjutkan?")) {
+      localStorage.setItem("cart", JSON.stringify(pendingOrder.cart));
+    }
+    localStorage.removeItem("pendingOrder");
+  }
+
+  renderCart();
 });

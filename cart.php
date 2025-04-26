@@ -295,8 +295,9 @@
 <body>
   <div class="container">
     <div class="cart-header">
-      <h1>Your Shopping Cart</h1>
-      <p>Review and manage your items before checkout</p>
+      <h1>Keranjang Belanja</h1>
+      <p>Review belanjaan kamu sebelum checkout</p>
+      <!-- <p>Review and manage your items before checkout</p> -->
     </div>
 
     <div class="cart-container">
@@ -304,8 +305,8 @@
         <table class="cart-table">
           <thead>
             <tr>
-              <th>Product</th>
-              <th>Price</th>
+              <th>Produk</th>
+              <th>Harga</th>
               <th>Quantity</th>
               <th>Subtotal</th>
               <th></th>
@@ -318,19 +319,20 @@
 
         <div id="emptyCart" class="empty-cart" style="display: none;">
           <i class="fas fa-shopping-cart"></i>
-          <h2>Your cart is empty</h2>
-          <p>Looks like you haven't added any items to your cart yet.</p>
-          <a href="index.php" class="continue-btn">
+          <h2>Keranjang kamu kosong nih!</h2>
+          <p>Sepertinya kamu belum menambahkan produk apapun ke keranjang belanja.</p>
+          <!-- <p>Looks like you haven't added any items to your cart yet.</p> -->
+          <!-- <a href="index.php" class="continue-btn">
             <i class="fas fa-arrow-left"></i> Continue Shopping
-          </a>
+          </a> -->
         </div>
 
         <div class="action-btns">
           <a href="index.php" class="btn btn-outline">
-            <i class="fas fa-arrow-left"></i> Continue Shopping
+            <i class="fas fa-arrow-left"></i> Kembali
           </a>
-          <button onclick="clearCart()" class="btn btn-danger">
-            <i class="fas fa-trash"></i> Clear Cart
+          <button id="button-clear" onclick="clearCart()" class="btn btn-danger">
+            <i class="fas fa-trash"></i> Kosongkan Keranjang
           </button>
         </div>
       </div>
@@ -341,10 +343,10 @@
           <span>Subtotal</span>
           <span id="subtotalAmount">Rp 0</span>
         </div> -->
-        <div class="summary-row">
+        <!-- <div class="summary-row">
           <span>Shipping</span>
           <span>Free</span>
-        </div>
+        </div> -->
         <div class="summary-row">
           <span>Tax</span>
           <span>Rp 0</span>
@@ -353,8 +355,11 @@
           <span>Total</span>
           <span id="totalAmount">Rp 0</span>
         </div>
-        <button class="checkout-btn" onclick="proceedToCheckout()">
-          <i class="fas fa-lock"></i> Proceed to Checkout
+        <span id="shippingEstimate" style=" font-size: 0.875rem; color: #888;">
+          *Estimasi total, belum termasuk ongkos kirim
+        </span>
+        <button class="checkout-btn" onclick="sendCartToWhatsApp()">
+          <i class="fab fa-whatsapp"></i> Pesan via WhatsApp
         </button>
       </div>
     </div>
