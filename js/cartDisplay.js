@@ -215,6 +215,7 @@ function renderCart() {
   const cartItems = document.getElementById("cartItems");
   const emptyCart = document.getElementById("emptyCart");
   const buttonClear = document.getElementById("button-clear");
+  const buttonWhatsapp = document.getElementById("button-whatsapp");
   const shippingEstimate = document.getElementById("shippingEstimate");
   const customerFormSection = document.getElementById("customerFormSection");
 
@@ -225,6 +226,7 @@ function renderCart() {
     emptyCart.style.display = "block";
     if (shippingEstimate) shippingEstimate.style.display = "none";
     if (buttonClear) buttonClear.style.display = "none";
+    if (buttonWhatsapp) buttonWhatsapp.style.display = "none";
     if (customerFormSection) customerFormSection.style.display = "none";
     updateTotalAmount();
     return;
@@ -232,6 +234,7 @@ function renderCart() {
 
   emptyCart.style.display = "none";
   if (buttonClear) buttonClear.style.display = "block";
+  if (buttonWhatsapp) buttonClear.style.display = "block";
   if (shippingEstimate) shippingEstimate.style.display = "block";
   if (customerFormSection) customerFormSection.style.display = "block";
 

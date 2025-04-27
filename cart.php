@@ -468,10 +468,10 @@
           <span>Shipping</span>
           <span>Free</span>
         </div> -->
-        <div class="summary-row">
+        <!-- <div class="summary-row">
           <span>Tax</span>
           <span>Rp 0</span>
-        </div>
+        </div> -->
         <div class="summary-row total">
           <span>Total</span>
           <span id="totalAmount">Rp 0</span>
@@ -479,7 +479,7 @@
         <span id="shippingEstimate" style=" font-size: 0.875rem; color: #888;">
           *Estimasi total, belum termasuk ongkos kirim
         </span>
-        <button class="checkout-btn" onclick="validateAndSendToWhatsApp()">
+        <button class="checkout-btn" id="button-whatsapp" onclick="validateAndSendToWhatsApp()">
           <i class="fab fa-whatsapp"></i> Pesan via WhatsApp
         </button>
       </div>
