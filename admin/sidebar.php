@@ -62,10 +62,17 @@ $current_page = basename($_SERVER['PHP_SELF']);
     <div class="sidebar-content">
         <ul>
 
-            <li <?php if ($current_page === 'kelola-produk.php') echo 'class="active"'; ?>>
-                <a href="kelola-produk.php">
+            <li <?php if ($current_page === 'index.php') echo 'class="active"'; ?>>
+                <a href="index.php">
                     <img src="../images/products.png" width="25">
                     <span>Kelola Produk</span>
+                </a>
+            </li>
+
+            <li <?php if ($current_page === 'galeri.php') echo 'class="active"'; ?>>
+                <a href="galeri.php">
+                    <img src="../images/galeri.png" width="25">
+                    <span>Kelola Galeri</span>
                 </a>
             </li>
 
