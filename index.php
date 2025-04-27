@@ -352,17 +352,17 @@ $category = isset($_GET['category']) ? $_GET['category'] : 'all';
             updateCartCount();
 
             // Show visual feedback on the button
-            buttonElement.innerHTML = '✓ Ditambahkan';
-            buttonElement.style.backgroundColor = '#2ecc71';
+            // buttonElement.innerHTML = '✓ Ditambahkan';
+            // buttonElement.style.backgroundColor = '#2ecc71';
 
             // Show toast notification
-            showCartToast();
+            // showCartToast();
 
             // Reset button after 2 seconds
-            setTimeout(() => {
-                buttonElement.innerHTML = 'Masukkan Keranjang';
-                buttonElement.style.backgroundColor = '#ab7b5d';
-            }, 2000);
+            // setTimeout(() => {
+            //     buttonElement.innerHTML = 'Masukkan Keranjang';
+            //     buttonElement.style.backgroundColor = '#ab7b5d';
+            // }, 2000);
 
             // Prevent page from scrolling to top
             return false;

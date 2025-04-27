@@ -22,7 +22,7 @@ function addToCart(id, name, price) {
   updateCartCount();
 
   // Show success message
-  // alert(`${name}  ditambahkan ke keranjang`);
+  alert(`${name}  ditambahkan ke keranjang`);
 }
 
 // Function to update the cart icon with the number of items
