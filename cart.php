@@ -34,6 +34,7 @@
       max-width: 1200px;
       margin: 0 auto;
       padding: 20px;
+      /* border: 1px solid red; */
     }
 
     .cart-header {
@@ -68,7 +69,7 @@
     }
 
     .cart-summary {
-      width: 300px;
+      /* width: 300px; */
       background: white;
       border-radius: var(--border-radius);
       box-shadow: var(--box-shadow);
@@ -280,6 +281,74 @@
       background-color: #f5f5f5;
     }
 
+    /* New styles for the form section */
+
+    .customer-form {
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      padding: 25px;
+      margin-top: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .form-note {
+      font-size: 0.875rem;
+      color: var(--gray);
+      margin-top: 5px;
+    }
+
+    .form-section {
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      padding: 25px;
+      /* width: 70%; */
+      margin-top: 30px;
+    }
+
+    .asterisk {
+      color: red;
+    }
+
+    @media (max-width: 768px) {
+      .form-section {
+        width: 100%;
+      }
+    }
+
+    .form-title {
+      font-size: 1.3rem;
+      color: var(--dark);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--light);
+    }
+
     @media (max-width: 768px) {
       .cart-container {
         flex-direction: column;
@@ -295,47 +364,99 @@
 <body>
   <div class="container">
     <div class="cart-header">
-      <h1>Keranjang Belanja</h1>
+      <h1>Checkout Page</h1>
       <p>Review belanjaan kamu sebelum checkout</p>
       <!-- <p>Review and manage your items before checkout</p> -->
     </div>
 
-    <div class="cart-container">
-      <div class="cart-items">
-        <table class="cart-table">
-          <thead>
-            <tr>
-              <th>Produk</th>
-              <th>Harga</th>
-              <th>Quantity</th>
-              <th>Subtotal</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody id="cartItems">
-            <!-- Cart items will be inserted here by JavaScript -->
-          </tbody>
-        </table>
+    <style>
+      .checkout-wrapper {
+        display: grid;
+        grid-template-columns: 2.5fr 1fr;
+        /* grid-template-rows: 1fr 1fr; */
+        gap: 1rem;
+        /* border: 1px solid pink; */
+      }
 
-        <div id="emptyCart" class="empty-cart" style="display: none;">
-          <i class="fas fa-shopping-cart"></i>
-          <h2>Keranjang kamu kosong nih!</h2>
-          <p>Sepertinya kamu belum menambahkan produk apapun ke keranjang belanja.</p>
-          <!-- <p>Looks like you haven't added any items to your cart yet.</p> -->
-          <!-- <a href="index.php" class="continue-btn">
+      .cart-container {
+        /* width: 100%;
+        order: 2; */
+        /* border: 1px solid green; */
+      }
+
+      .cart-summary {
+        /* border: 1px solid black; */
+      }
+
+      .form-section {
+        /* order: 2; */
+        /* border: 1px solid yellow; */
+      }
+
+      @media (max-width: 650px) {
+
+        .cart-container {
+          grid-column: span 2;
+
+        }
+
+
+        .form-section {
+          grid-row-start: 2;
+          grid-column: span 2;
+        }
+
+        /* .cart-container {
+          grid-column: span 2;
+        } */
+
+        .cart-summary {
+          width: 400px !important;
+        }
+
+      }
+    </style>
+
+    <div class="checkout-wrapper">
+      <div class="cart-container">
+        <div class="cart-items">
+          <table class="cart-table">
+            <thead>
+              <tr>
+                <th>Produk</th>
+                <th>Harga</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="cartItems">
+              <!-- Cart items will be inserted here by JavaScript -->
+            </tbody>
+          </table>
+
+          <div id="emptyCart" class="empty-cart" style="display: none;">
+            <i class="fas fa-shopping-cart"></i>
+            <h2>Keranjang kamu kosong nih!</h2>
+            <p>Sepertinya kamu belum menambahkan produk apapun ke keranjang belanja.</p>
+            <!-- <p>Looks like you haven't added any items to your cart yet.</p> -->
+            <!-- <a href="index.php" class="continue-btn">
             <i class="fas fa-arrow-left"></i> Continue Shopping
           </a> -->
+          </div>
+
+          <div class="action-btns">
+            <a href="index.php" class="btn btn-outline">
+              <i class="fas fa-arrow-left"></i> Kembali
+            </a>
+            <button id="button-clear" onclick="clearCart()" class="btn btn-danger">
+              <i class="fas fa-trash"></i> Kosongkan Keranjang
+            </button>
+          </div>
         </div>
 
-        <div class="action-btns">
-          <a href="index.php" class="btn btn-outline">
-            <i class="fas fa-arrow-left"></i> Kembali
-          </a>
-          <button id="button-clear" onclick="clearCart()" class="btn btn-danger">
-            <i class="fas fa-trash"></i> Kosongkan Keranjang
-          </button>
-        </div>
       </div>
+
 
       <div class="cart-summary">
         <h3 class="summary-title">Order Summary</h3>
@@ -358,12 +479,50 @@
         <span id="shippingEstimate" style=" font-size: 0.875rem; color: #888;">
           *Estimasi total, belum termasuk ongkos kirim
         </span>
-        <button class="checkout-btn" onclick="sendCartToWhatsApp()">
+        <button class="checkout-btn" onclick="validateAndSendToWhatsApp()">
           <i class="fab fa-whatsapp"></i> Pesan via WhatsApp
         </button>
       </div>
+
+      <!-- Customer Information Form -->
+      <div class="form-section" id="customerFormSection" style="display: none;">
+        <h3 class="form-title">Informasi Pelanggan</h3>
+        <form id="customerForm">
+          <div class="form-group">
+            <label for="customerName">Nama Lengkap <span class="asterisk">*</span></label>
+            <input type="text" id="customerName" class="form-control" required>
+          </div>
+
+          <div class="form-group">
+            <label for="customerPhone">Nomor Telepon <span class="asterisk">*</span></label>
+            <input type="tel" id="customerPhone" class="form-control" required>
+            <p class="form-note">Pastikan nomor aktif untuk konfirmasi pesanan</p>
+          </div>
+
+          <div class="form-group">
+            <label for="customerAddress">Alamat Lengkap <span class="asterisk">*</span></label>
+            <textarea id="customerAddress" class="form-control" rows="3" required></textarea>
+            <p class="form-note">Sertakan kecamatan dan kode pos</p>
+          </div>
+
+          <div class="form-group">
+            <label for="customerNotes">Catatan Tambahan (optional)</label>
+            <textarea id="customerNotes" class="form-control" rows="2"></textarea>
+          </div>
+
+          <!-- <button type="button" class="checkout-btn" onclick="validateAndSendToWhatsApp()">
+          <i class="fab fa-whatsapp"></i> Pesan via WhatsApp
+        </button> -->
+        </form>
+      </div>
     </div>
   </div>
+
+
+
+
+
+
 
   <script src="js/cartDisplay.js"></script>
   <script>

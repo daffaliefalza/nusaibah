@@ -216,6 +216,7 @@ function renderCart() {
   const emptyCart = document.getElementById("emptyCart");
   const buttonClear = document.getElementById("button-clear");
   const shippingEstimate = document.getElementById("shippingEstimate");
+  const customerFormSection = document.getElementById("customerFormSection");
 
   cartItems.innerHTML = "";
 
@@ -224,7 +225,7 @@ function renderCart() {
     emptyCart.style.display = "block";
     if (shippingEstimate) shippingEstimate.style.display = "none";
     if (buttonClear) buttonClear.style.display = "none";
-
+    if (customerFormSection) customerFormSection.style.display = "none";
     updateTotalAmount();
     return;
   }
@@ -232,7 +233,9 @@ function renderCart() {
   emptyCart.style.display = "none";
   if (buttonClear) buttonClear.style.display = "block";
   if (shippingEstimate) shippingEstimate.style.display = "block";
+  if (customerFormSection) customerFormSection.style.display = "block";
 
+  console.log(customerFormSection);
   // Render each cart item
   cart.forEach((item, index) => {
     const totalItemPrice = item.price * item.quantity;
@@ -329,29 +332,76 @@ function updateCartCount() {
   if (cartCountElement) cartCountElement.innerText = count;
 }
 
-// Send cart to WhatsApp with confirmation flow
-function sendCartToWhatsApp() {
+// Validate and send to WhatsApp
+function validateAndSendToWhatsApp() {
+  const customerName = document.getElementById("customerName").value.trim();
+  const customerPhone = document.getElementById("customerPhone").value.trim();
+  const customerAddress = document
+    .getElementById("customerAddress")
+    .value.trim();
+
+  if (!customerName || !customerPhone || !customerAddress) {
+    alert(
+      "Harap lengkapi semua informasi yang diperlukan (Nama, Nomor Telefon, dan Alamat)"
+    );
+    return;
+  }
+
+  // Validate phone number
+  const phoneRegex = /^[0-9]{10,15}$/;
+  if (!phoneRegex.test(customerPhone)) {
+    alert(
+      "Nomor Telefon tidak valid. Harap masukkan nomor yang benar (10-15 digit angka)"
+    );
+    return;
+  }
+
+  sendCartToWhatsApp(customerName, customerPhone, customerAddress);
+}
+
+// Send cart to WhatsApp with customer info
+function sendCartToWhatsApp(name, phone, address) {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   if (cart.length === 0) {
     alert("Keranjang kamu kosong!");
     return;
   }
 
+  const notes = document.getElementById("customerNotes").value.trim();
+
   // Format WhatsApp message
-  let message = "Halo, saya ingin memesan:\n\n";
+  let message = `Halo, saya *${name}* ingin memesan:\n\n`;
   let totalAmount = 0;
 
+  // Add cart items
+  message += ` *Daftar Pesanan:*\n`;
   cart.forEach((item) => {
     const itemTotal = item.price * item.quantity;
     totalAmount += itemTotal;
-    message += `*${item.name}*\n`;
-    message += `   Jumlah: ${item.quantity}\n`;
-    message += `   Harga: Rp ${formatCurrency(item.price)}/pcs\n`;
-    message += `   Subtotal: Rp ${formatCurrency(itemTotal)}\n\n`;
+    message += `\n *${item.name}*\n`;
+    message += `    Jumlah: ${item.quantity}\n`;
+    message += `    Harga: Rp ${formatCurrency(item.price)}/pcs\n`;
+    message += `   Subtotal: Rp ${formatCurrency(itemTotal)}\n`;
   });
 
-  message += `*TOTAL: Rp ${formatCurrency(totalAmount)}*\n\n`;
-  message += `Mohon konfirmasi ketersediaan barang. Terima kasih!`;
+  // Add summary
+  message += `\n *Total Pesanan: Rp ${formatCurrency(totalAmount)}*\n\n`;
+
+  // Add customer info
+  message += `*Informasi Pelanggan:*\n`;
+  message += `   Nama: ${name}\n`;
+  message += `   No Telepon: ${phone}\n`;
+  message += `    Alamat: ${address}\n`;
+  if (notes) {
+    message += `    Catatan: ${notes}\n`;
+  }
+
+  message += `\nMohon konfirmasi ketersediaan barang dan total pembayaran. Terima kasih!`;
+
+  // Create WhatsApp URL
+  const whatsappUrl = `https://wa.me/6281384166485?text=${encodeURIComponent(
+    message
+  )}`;
 
   // Store pending order
   const orderId = Date.now();
@@ -360,15 +410,13 @@ function sendCartToWhatsApp() {
     JSON.stringify({
       id: orderId,
       cart: [...cart],
+      customerInfo: { name, phone, address, notes },
       timestamp: new Date().toISOString(),
     })
   );
 
   // Open WhatsApp
-  window.open(
-    `https://wa.me/6281384166485?text=${encodeURIComponent(message)}`,
-    "_blank"
-  );
+  window.open(whatsappUrl, "_blank");
 
   // Setup confirmation flow
   setupOrderConfirmation(orderId);
@@ -418,6 +466,17 @@ document.addEventListener("DOMContentLoaded", function () {
   if (pendingOrder) {
     if (confirm("Anda memiliki pesanan yang belum selesai. Lanjutkan?")) {
       localStorage.setItem("cart", JSON.stringify(pendingOrder.cart));
+      // Pre-fill form if exists
+      if (pendingOrder.customerInfo) {
+        document.getElementById("customerName").value =
+          pendingOrder.customerInfo.name || "";
+        document.getElementById("customerPhone").value =
+          pendingOrder.customerInfo.phone || "";
+        document.getElementById("customerAddress").value =
+          pendingOrder.customerInfo.address || "";
+        document.getElementById("customerNotes").value =
+          pendingOrder.customerInfo.notes || "";
+      }
     }
     localStorage.removeItem("pendingOrder");
   }
