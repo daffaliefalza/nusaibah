@@ -166,6 +166,34 @@ $category = isset($_GET['category']) ? $_GET['category'] : 'all';
             transform: translateY(-1px);
         }
 
+        .cart-toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #2ecc71;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .cart-toast.show {
+            opacity: 1;
+        }
+
+        .cart-toast-icon {
+            width: 20px;
+            height: 20px;
+        }
+
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .produk-list {
@@ -218,6 +246,13 @@ $category = isset($_GET['category']) ? $_GET['category'] : 'all';
     </nav>
     <!-- nav end -->
 
+    <div class="cart-toast" id="cartToast">
+        <svg class="cart-toast-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white">
+            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
+        </svg>
+        <span>Ditambahkan ke keranjang!</span>
+    </div>
+
     <!-- main section -->
     <main>
         <div class="container">
@@ -262,7 +297,7 @@ $category = isset($_GET['category']) ? $_GET['category'] : 'all';
                         <?php if ($isOutOfStock): ?>
                             <button class="order" disabled>Stok Habis</button>
                         <?php else: ?>
-                            <button class="order" onclick="addToCart(<?= $row['id_produk'] ?>, '<?= htmlspecialchars(addslashes($row['nama_produk'])) ?>', <?= $row['harga'] ?>)">
+                            <button class="order" onclick="addToCartWithToast(<?= $row['id_produk'] ?>, '<?= htmlspecialchars(addslashes($row['nama_produk'])) ?>', <?= $row['harga'] ?>, this)">
                                 Masukkan Keranjang
                             </button>
                         <?php endif; ?>
@@ -295,6 +330,43 @@ $category = isset($_GET['category']) ? $_GET['category'] : 'all';
         document.addEventListener('DOMContentLoaded', function() {
             updateCartCount();
         });
+
+        // New function to show toast notification
+        // function showCartToast() {
+        //     const toast = document.getElementById('cartToast');
+        //     toast.classList.add('show');
+        //     setTimeout(() => {
+        //         toast.classList.remove('show');
+        //     }, 3000);
+        // }
+
+        // Modified add to cart function with toast
+        function addToCartWithToast(productId, productName, price, buttonElement) {
+            // Prevent default button behavior
+            event.preventDefault();
+
+            // Add item to cart (using your existing cart.js function)
+            addToCart(productId, productName, price);
+
+            // Update cart count
+            updateCartCount();
+
+            // Show visual feedback on the button
+            buttonElement.innerHTML = '✓ Ditambahkan';
+            buttonElement.style.backgroundColor = '#2ecc71';
+
+            // Show toast notification
+            showCartToast();
+
+            // Reset button after 2 seconds
+            setTimeout(() => {
+                buttonElement.innerHTML = 'Masukkan Keranjang';
+                buttonElement.style.backgroundColor = '#ab7b5d';
+            }, 2000);
+
+            // Prevent page from scrolling to top
+            return false;
+        }
     </script>
 </body>
 
