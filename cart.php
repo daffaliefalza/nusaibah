@@ -378,20 +378,6 @@
         /* border: 1px solid pink; */
       }
 
-      .cart-container {
-        /* width: 100%;
-        order: 2; */
-        /* border: 1px solid green; */
-      }
-
-      .cart-summary {
-        /* border: 1px solid black; */
-      }
-
-      .form-section {
-        /* order: 2; */
-        /* border: 1px solid yellow; */
-      }
 
       @media (max-width: 650px) {
 
