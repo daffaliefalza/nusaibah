@@ -204,8 +204,9 @@ $category = isset($_GET['category']) ? $_GET['category'] : 'all';
             </a>
             <ul class="nav-links">
                 <li><a href="#" class="active">Produk</a></li>
-                <li><a href="about.php">About</a></li>
-                <li><a href="kontak.php">Contact</a></li>
+                <li><a href="about.php">Tentang Kami</a></li>
+                <li><a href="galeri.php">Galeri</a></li>
+                <li><a href="kontak.php">Kontak</a></li>
             </ul>
             <div class="cart">
                 <a href="cart.php">
@@ -272,7 +273,7 @@ $category = isset($_GET['category']) ? $_GET['category'] : 'all';
     </main>
     <!-- footer start -->
     <footer>
-        &copy; 2024 - Afiat Barokah Mandri | All rights reserved. Designed By
+        &copy; 2024 - Afiat Barokah Mandiri | All rights reserved. Designed By
         <a style="text-decoration: underline; color: #fff" href="https://webwirausahamuda.com" target="_blank">Wimuda</a>
     </footer>
     <!-- footer end -->

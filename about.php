@@ -19,8 +19,9 @@
       </a>
       <ul class="nav-links">
         <li><a href="index.php">Produk</a></li>
-        <li><a href="about.php" class="active">About</a></li>
-        <li><a href="kontak.php">Contact</a></li>
+        <li><a href="about.php" class="active">Tentang Kami</a></li>
+        <li><a href="galeri.php">Galeri</a></li>
+        <li><a href="kontak.php">Kontak</a></li>
       </ul>
       <div class="cart">
         <a href="cart.php">
@@ -49,7 +50,7 @@
   </main>
   <!-- footer start -->
   <footer>
-    &copy; 2024 - Afiat Barokah Mandri | All rights reserved. Designed By
+    &copy; 2024 - Afiat Barokah Mandiri | All rights reserved. Designed By
     <a
       style="text-decoration: underline; color: #fff"
       href="https://webwirausahamuda.com"
