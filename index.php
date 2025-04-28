@@ -377,7 +377,7 @@ $category = isset($_GET['category']) ? $_GET['category'] : 'all';
     </footer>
     <!-- footer end -->
 
-    <a href="https://wa.me/6281213567170?text=Halo admin, %20saya%20ingin%20bertanya" target="_blank">
+    <a href="https://wa.me/6282264676214?text=Halo admin, %20saya%20ingin%20bertanya" target="_blank">
         <img class="whatsapp-redirect" src="images/whatsapp.svg" alt="WhatsApp icon" style="
           width: 65px;
           position: fixed;

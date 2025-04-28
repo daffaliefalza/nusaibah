@@ -126,7 +126,7 @@
       <div class="social-media-wrapper">
         <h2 class="social-title">Social Media</h2>
         <div class="social-icons">
-          <a href="https://wa.me/6281213567170?text=Halo admin, %20saya%20ingin%20bertanya"
+          <a href="https://wa.me/6282264676214?text=Halo admin, %20saya%20ingin%20bertanya"
             target="_blank" class="social-icon">
             <img src="images/whatsapp.svg" alt="WhatsApp">
           </a>
