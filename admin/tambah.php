@@ -94,6 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <select name="kategori_produk" id="kategori_produk" required>
             <option value="Bumbu">Bumbu</option>
             <option value="Rempah">Rempah</option>
+            <option value="Jamu">Jamu</option>
         </select>
         <br>
 
@@ -117,9 +118,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <input type="number" name="stok" id="stok" required>
         <br>
 
-        <label for="pirt">Nomor Produk</label>
+        <label for="pirt">Nomor Produk (Optional)</label>
         <br>
-        <input type="text" name="pirt" id="pirt" required>
+        <input type="text" name="pirt" id="pirt">
         <br>
 
         <label for="berat">Berat Produk</label>

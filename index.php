@@ -325,6 +325,7 @@ $category = isset($_GET['category']) ? $_GET['category'] : 'all';
                 <a href="?category=all" class="filter-btn <?= $category === 'all' ? 'active' : '' ?>">All Products</a>
                 <a href="?category=bumbu" class="filter-btn <?= $category === 'bumbu' ? 'active' : '' ?>">Bumbu</a>
                 <a href="?category=rempah" class="filter-btn <?= $category === 'rempah' ? 'active' : '' ?>">Rempah</a>
+                <a href="?category=jamu" class="filter-btn <?= $category === 'jamu' ? 'active' : '' ?>">Jamu</a>
             </div>
 
             <div class="produk-list">

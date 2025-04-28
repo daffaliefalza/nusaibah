@@ -117,6 +117,7 @@ if (isset($_GET['id_produk'])) {
         <select name="kategori_produk" id="kategori_produk">
             <option value="Bumbu" <?php if ($row['kategori_produk'] == 'Bumbu') echo 'selected'; ?>>Bumbu</option>
             <option value="Rempah" <?php if ($row['kategori_produk'] == 'Rempah') echo 'selected'; ?>>Rempah</option>
+            <option value="Jamu" <?php if ($row['kategori_produk'] == 'Jamu') echo 'selected'; ?>>Jamu</option>
         </select><br>
 
         <label for="gambar">Gambar</label><br>
