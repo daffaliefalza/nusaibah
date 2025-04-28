@@ -194,6 +194,59 @@ $category = isset($_GET['category']) ? $_GET['category'] : 'all';
             height: 20px;
         }
 
+        .product-actions {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .detail-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: transparent;
+            color: #5a4a42;
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            border: 1px solid #d7ccc8;
+            transition: all 0.3s;
+            font-weight: 500;
+            width: 100%;
+            max-width: 200px;
+            margin: 0 auto;
+        }
+
+        .detail-link:hover {
+            background-color: #f8f5f2;
+            border-color: #ab7b5d;
+            color: #ab7b5d;
+        }
+
+        .detail-icon {
+            transition: transform 0.3s;
+        }
+
+        .detail-link:hover .detail-icon {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 480px) {
+            .product-actions {
+                flex-direction: column;
+            }
+
+            .detail-link,
+            .order {
+                max-width: 100%;
+            }
+        }
+
+
+
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .produk-list {
@@ -297,11 +350,21 @@ $category = isset($_GET['category']) ? $_GET['category'] : 'all';
                         <?php if ($isOutOfStock): ?>
                             <button class="order" disabled>Stok Habis</button>
                         <?php else: ?>
-                            <button class="order" onclick="addToCartWithToast(<?= $row['id_produk'] ?>, '<?= htmlspecialchars(addslashes($row['nama_produk'])) ?>', <?= $row['harga'] ?>, this)">
-                                Masukkan Keranjang
-                            </button>
+                            <div class="product-actions">
+                                <button class="order" onclick="addToCartWithToast(<?= $row['id_produk'] ?>, '<?= htmlspecialchars(addslashes($row['nama_produk'])) ?>', <?= $row['harga'] ?>, this)">
+                                    Masukkan Keranjang
+                                </button>
+                                <a href="detail-produk.php?id=<?= $row['id_produk'] ?>" class="detail-link">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" class="detail-icon">
+                                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                                        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                                    </svg>
+                                    Detail Produk
+                                </a>
+                            </div>
                         <?php endif; ?>
                     </div>
+
                 <?php } ?>
             </div>
         </div>
