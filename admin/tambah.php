@@ -1,26 +1,22 @@
 <?php include '../config.php'; ?>
 <?php include 'auth.php'; ?>
 
-
 <?php
-
-
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
     $nama_produk = $_POST['nama_produk'];
     $kategori_produk = $_POST['kategori_produk'];
-    $gambar = $_FILES['gambar']['name']; // Updated to handle file upload
-    $image_tmp = $_FILES['gambar']['tmp_name']; // Temporary location of the file
+    $gambar = $_FILES['gambar']['name'];
+    $image_tmp = $_FILES['gambar']['tmp_name'];
     $harga = $_POST['harga'];
     $deskripsi = $_POST['deskripsi'];
     $stok = $_POST['stok'];
+    $pirt = $_POST['pirt'];
+    $berat = $_POST['berat'];
 
-    $upload_directory = "upload/"; // Define the upload directory
+    $upload_directory = "upload/";
+    move_uploaded_file($image_tmp, $upload_directory . $gambar);
 
-    move_uploaded_file($image_tmp, $upload_directory . $gambar); // Move the uploaded file to the defined directory
-
-    $sql = "INSERT INTO produk VALUES ('', '$nama_produk', '$kategori_produk', '$gambar', $harga, '$deskripsi', $stok)";
+    $sql = "INSERT INTO produk VALUES ('', '$nama_produk', '$kategori_produk', '$gambar', $harga, '$deskripsi', $stok, '$pirt', '$berat')";
 
     $result = mysqli_query($conn, $sql);
 
@@ -30,7 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo '<script>alert("Gagal menambahkan data!");</script>';
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -88,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <h1 style=" text-align: center;">Tambah Data Produk</h1>
 
-    <form action="" method="post" enctype="multipart/form-data"> <!-- enctype="multipart/form-data" is required for file uploads -->
+    <form action="" method="post" enctype="multipart/form-data">
         <label for="nama_produk">Nama Produk</label>
         <br>
         <input type="text" name="nama_produk" id="nama_produk" required>
@@ -104,8 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <label for="gambar">Gambar</label>
         <br>
-
-        <input type="file" name="gambar" id="gambar" required> <!-- Change input type to file for image upload -->
+        <input type="file" name="gambar" id="gambar" required>
         <br>
 
         <label for="harga">Harga</label>
@@ -123,8 +117,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <input type="number" name="stok" id="stok" required>
         <br>
 
-        <button type="submit" name="tambah_data">Tambah!</button>
+        <label for="pirt">Nomor Produk</label>
+        <br>
+        <input type="text" name="pirt" id="pirt" required>
+        <br>
 
+        <label for="berat">Berat Produk</label>
+        <br>
+        <input type="text" name="berat" id="berat" placeholder="Contoh: 500g, 1kg" required>
+        <br>
+
+        <button type="submit" name="tambah_data">Tambah!</button>
     </form>
 
 </body>

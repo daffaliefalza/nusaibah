@@ -190,6 +190,8 @@ $result = mysqli_query($conn, $sql);
               <th>Harga</th>
               <th>Deskripsi</th>
               <th>Stok</th>
+              <th>NO. Produk</th>
+              <th>Berat Bersih</th>
               <th>Aksi</th>
             </tr>
           </thead>
@@ -208,6 +210,9 @@ $result = mysqli_query($conn, $sql);
                 <td><?php echo 'Rp ' . number_format($row['harga'], 0, ',', '.') ?></td>
                 <td><?php echo htmlspecialchars(substr($row['deskripsi'], 0, 50)) . (strlen($row['deskripsi']) > 50 ? '...' : '') ?></td>
                 <td><?php echo $row['stok'] ?></td>
+                <td><?php echo $row['pirt'] ?></td>
+                <td><?php echo $row['berat'] ?></td>
+
                 <td>
                   <div class="action-links">
                     <a href="ubah.php?id_produk=<?php echo $row['id_produk'] ?>">Ubah</a>

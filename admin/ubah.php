@@ -21,6 +21,8 @@ if (isset($_GET['id_produk'])) {
             $harga = $_POST['harga'];
             $deskripsi = $_POST['deskripsi'];
             $stok = $_POST['stok'];
+            $pirt = $_POST['pirt'];
+            $berat = $_POST['berat'];
 
             // Get the last image filename
             $last_gambar = $row['gambar'];
@@ -42,7 +44,9 @@ if (isset($_GET['id_produk'])) {
                         gambar='$gambar', 
                         harga=$harga, 
                         deskripsi='$deskripsi', 
-                        stok=$stok 
+                        stok=$stok,
+                        pirt='$pirt',
+                        berat='$berat'
                     WHERE id_produk='$id_produk'";
 
             $result = mysqli_query($conn, $sql);
@@ -100,7 +104,6 @@ if (isset($_GET['id_produk'])) {
 
 <body>
 
-
     <a href="./index.php" class="back">
         ⇐ Kembali</a>
 
@@ -131,6 +134,12 @@ if (isset($_GET['id_produk'])) {
 
         <label for="stok">Stok</label><br>
         <input type="number" name="stok" id="stok" value="<?php echo $row['stok']; ?>"><br>
+
+        <label for="pirt">Nomor Produk</label><br>
+        <input type="text" name="pirt" id="pirt" value="<?php echo $row['pirt']; ?>"><br>
+
+        <label for="berat">Berat Produk</label><br>
+        <input type="text" name="berat" id="berat" value="<?php echo $row['berat']; ?>" placeholder="Contoh: 500g, 1kg"><br>
 
         <button type="submit" name="ubah_data">Ubah!</button>
     </form>
