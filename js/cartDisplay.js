@@ -1,197 +1,3 @@
-// Function to format the price with thousands separator
-// function formatCurrency(amount) {
-//   return amount.toLocaleString("id-ID"); // Format the number with Indonesian locale
-// }
-
-// // Function to calculate and update the total amount
-// function updateTotalAmount() {
-//   const cart = JSON.parse(localStorage.getItem("cart")) || [];
-//   let totalAmount = 0;
-
-//   cart.forEach((item) => {
-//     totalAmount += item.price * item.quantity;
-//   });
-
-//   document.getElementById("totalAmount").innerText = `Rp ${formatCurrency(
-//     totalAmount
-//   )}`;
-// }
-
-// // Function to render cart items on the cart page with proper styling
-// function renderCart() {
-//   const cart = JSON.parse(localStorage.getItem("cart")) || [];
-//   const cartItems = document.getElementById("cartItems");
-//   const emptyCart = document.getElementById("emptyCart");
-//   const shippingEstimate = document.getElementById("shippingEstimate"); // Add this line
-
-//   cartItems.innerHTML = ""; // Clear current items
-
-//   if (cart.length === 0) {
-//     emptyCart.style.display = "block";
-//     if (shippingEstimate) shippingEstimate.style.display = "none"; // Hide estimate
-//     updateTotalAmount(); // Update total when cart is empty
-//     return;
-//   }
-
-//   if (shippingEstimate) shippingEstimate.style.display = "block"; // Show estimate
-
-//   emptyCart.style.display = "none";
-
-//   cart.forEach((item, index) => {
-//     const totalItemPrice = item.price * item.quantity;
-
-//     cartItems.innerHTML += `
-//       <tr>
-//         <td>
-//           <div class="product-cell">
-
-//             <div class="product-info">
-//               <h3>${item.name}</h3>
-//               <p>${item.description || ""}</p>
-//             </div>
-//           </div>
-//         </td>
-//         <td class="price">Rp ${formatCurrency(item.price)}</td>
-//         <td>
-//           <div class="quantity-control">
-//             <button class="quantity-btn" onclick="updateQuantity(${index}, ${
-//       item.quantity - 1
-//     })">-</button>
-//             <input type="number" class="quantity-input" value="${
-//               item.quantity
-//             }" min="1"
-//                    onchange="updateQuantity(${index}, this.value)">
-//             <button class="quantity-btn" onclick="updateQuantity(${index}, ${
-//       item.quantity + 1
-//     })">+</button>
-//           </div>
-//         </td>
-//         <td class="price">Rp ${formatCurrency(totalItemPrice)}</td>
-//         <td>
-//           <button class="remove-btn" onclick="removeFromCart(${index})">
-//             <i class="fas fa-trash"></i>
-//           </button>
-//         </td>
-//       </tr>
-//     `;
-//   });
-
-//   updateTotalAmount(); // Update the total after rendering items
-// }
-
-// // Function to add a new item to the cart
-// function addToCart(item) {
-//   const cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-//   // Check if item already exists in the cart
-//   const existingItemIndex = cart.findIndex(
-//     (cartItem) => cartItem.name === item.name
-//   );
-
-//   if (existingItemIndex >= 0) {
-//     // Update quantity if item exists
-//     cart[existingItemIndex].quantity += item.quantity;
-//   } else {
-//     // Add new item
-//     cart.push(item);
-//   }
-
-//   localStorage.setItem("cart", JSON.stringify(cart));
-//   renderCart();
-//   updateCartCount();
-// }
-
-// // Function to update item quantity in the cart
-// function updateQuantity(index, quantity) {
-//   let cart = JSON.parse(localStorage.getItem("cart"));
-//   if (quantity > 0) {
-//     cart[index].quantity = parseInt(quantity);
-//     localStorage.setItem("cart", JSON.stringify(cart));
-//     renderCart(); // This will call updateTotalAmount
-//     updateCartCount();
-//   }
-// }
-
-// // Function to remove an item from the cart
-// function removeFromCart(index) {
-//   let cart = JSON.parse(localStorage.getItem("cart"));
-//   cart.splice(index, 1);
-//   localStorage.setItem("cart", JSON.stringify(cart));
-//   renderCart();
-//   updateCartCount();
-//   updateTotalAmount(); // Explicitly update total
-// }
-
-// // Function to clear the entire cart
-// function clearCart() {
-//   localStorage.removeItem("cart");
-//   renderCart();
-//   updateCartCount();
-//   updateTotalAmount(); // Explicitly update total
-// }
-
-// // Function to display the count of items in the cart
-// function updateCartCount() {
-//   const cart = JSON.parse(localStorage.getItem("cart")) || [];
-//   let count = cart.reduce((total, item) => total + item.quantity, 0);
-//   // Update your cart icon count if you have one
-//   const cartCountElement = document.getElementById("cart-count");
-//   if (cartCountElement) {
-//     cartCountElement.innerText = count;
-//   }
-// }
-
-// // Function to format cart items into a WhatsApp message
-// function sendCartToWhatsApp() {
-//   const cart = JSON.parse(localStorage.getItem("cart")) || [];
-//   if (cart.length === 0) {
-//     alert("Keranjang Anda kosong!");
-//     return;
-//   }
-
-//   let message = "Halo, saya ingin memesan:\n\n";
-//   let totalAmount = 0;
-
-//   cart.forEach((item) => {
-//     const itemTotal = item.price * item.quantity;
-//     totalAmount += itemTotal;
-//     message += `*${item.name}*\n`; // Using asterisks for bold in WhatsApp
-//     message += `   Jumlah: ${item.quantity}\n`;
-//     message += `   Harga: Rp ${formatCurrency(item.price)}/pcs\n`;
-//     message += `   Subtotal: Rp ${formatCurrency(itemTotal)}\n\n`;
-//   });
-
-//   message += `TOTAL: Rp ${formatCurrency(totalAmount)}\n\n`;
-//   message += `Mohon konfirmasi ketersediaan barang dan total pembayaran. Terima kasih!`;
-
-//   // Encode the message for the WhatsApp URL
-//   const whatsappMessage = encodeURIComponent(message);
-//   const whatsappUrl = `https://wa.me/6281384166485?text=${whatsappMessage}`;
-
-//   // Open WhatsApp
-//   window.open(whatsappUrl, "_blank");
-
-//   setTimeout(() => {
-//     if (
-//       confirm(
-//         "Pesanan sudah terkirim via WhatsApp. Kosongkan keranjang sekarang?"
-//       )
-//     ) {
-//       localStorage.removeItem("cart");
-//       renderCart();
-//     }
-//   }, 1000); // Short delay to ensure WhatsApp opens
-
-//   // Optional: Clear the cart after sending
-//   // localStorage.removeItem("cart");
-//   // renderCart();
-// }
-
-// // Initialize cart display on page load
-// document.addEventListener("DOMContentLoaded", function () {
-//   renderCart();
-// });
-
 // Format price with thousands separator
 function formatCurrency(amount) {
   return amount.toLocaleString("id-ID");
@@ -335,6 +141,92 @@ function updateCartCount() {
   if (cartCountElement) cartCountElement.innerText = count;
 }
 
+// Show copy modal with WhatsApp message
+function showCopyModal(message) {
+  const modal = document.getElementById("copyModal");
+  const messageContent = document.getElementById("whatsappMessageContent");
+
+  messageContent.textContent = message;
+  modal.style.display = "flex";
+
+  // Store message in global variable for copying
+  window.currentWhatsAppMessage = message;
+}
+
+// Close copy modal
+function closeCopyModal() {
+  document.getElementById("copyModal").style.display = "none";
+}
+
+// Copy WhatsApp message to clipboard
+function copyWhatsAppMessage() {
+  const message = window.currentWhatsAppMessage;
+
+  // Try modern clipboard API first
+  if (navigator.clipboard) {
+    navigator.clipboard
+      .writeText(message)
+      .then(() => {
+        // Show success message without closing modal
+        const successMsg = document.createElement("div");
+        successMsg.textContent = "Pesan telah disalin ke clipboard!";
+        successMsg.style.color = "green";
+        successMsg.style.marginTop = "10px";
+        successMsg.style.textAlign = "center";
+
+        // Remove any existing success message
+        const existingMsg = document.querySelector(".copy-success-message");
+        if (existingMsg) existingMsg.remove();
+
+        successMsg.className = "copy-success-message";
+        document.querySelector(".copy-modal-footer").prepend(successMsg);
+
+        // Remove the message after 3 seconds
+        setTimeout(() => {
+          successMsg.remove();
+        }, 3000);
+      })
+      .catch(() => fallbackCopyText(message));
+  } else {
+    fallbackCopyText(message);
+  }
+}
+
+// Fallback copy method for older browsers
+function fallbackCopyText(text) {
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  document.body.appendChild(textarea);
+  textarea.select();
+
+  try {
+    document.execCommand("copy");
+
+    // Show success message without closing modal
+    const successMsg = document.createElement("div");
+    successMsg.textContent = "Pesan telah disalin!";
+    successMsg.style.color = "green";
+    successMsg.style.marginTop = "10px";
+    successMsg.style.textAlign = "center";
+
+    // Remove any existing success message
+    const existingMsg = document.querySelector(".copy-success-message");
+    if (existingMsg) existingMsg.remove();
+
+    successMsg.className = "copy-success-message";
+    document.querySelector(".copy-modal-footer").prepend(successMsg);
+
+    // Remove the message after 3 seconds
+    setTimeout(() => {
+      successMsg.remove();
+    }, 3000);
+  } catch (err) {
+    alert("Gagal menyalin pesan, silakan copy manual dari kotak teks.");
+  }
+
+  document.body.removeChild(textarea);
+}
+
 // Validate and send to WhatsApp
 function validateAndSendToWhatsApp() {
   const customerName = document.getElementById("customerName").value.trim();
@@ -402,7 +294,7 @@ function sendCartToWhatsApp(name, phone, address) {
   message += `\nMohon konfirmasi ketersediaan barang dan total pembayaran. Terima kasih!`;
 
   // Create WhatsApp URL
-  const whatsappUrl = `https://wa.me/6281384166485?text=${encodeURIComponent(
+  const whatsappUrl = `https://wa.me/6282264676214?text=${encodeURIComponent(
     message
   )}`;
 
@@ -419,7 +311,12 @@ function sendCartToWhatsApp(name, phone, address) {
   );
 
   // Open WhatsApp
-  window.open(whatsappUrl, "_blank");
+  const newWindow = window.open(whatsappUrl, "_blank");
+
+  // Show copy modal after a short delay
+  setTimeout(() => {
+    showCopyModal(message);
+  }, 1000);
 
   // Setup confirmation flow
   setupOrderConfirmation(orderId);
@@ -454,11 +351,11 @@ function checkOrderCompletion(orderId, callback) {
     return;
   }
 
-  if (confirm("Kosongkan keranjang belanja?")) {
-    localStorage.removeItem("pendingOrder");
-    localStorage.removeItem("cart");
-    renderCart();
-  }
+  // if (confirm("Kosongkan keranjang belanja?")) {
+  //   localStorage.removeItem("pendingOrder");
+  //   localStorage.removeItem("cart");
+  // }
+  renderCart();
   if (callback) callback();
 }
 

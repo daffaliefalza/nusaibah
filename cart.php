@@ -335,6 +335,117 @@
       color: red;
     }
 
+    /* Copy Modal Styles */
+    .copy-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .copy-modal-content {
+      background-color: white;
+      padding: 25px;
+      border-radius: var(--border-radius);
+      width: 90%;
+      max-width: 600px;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    .copy-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .copy-modal-title {
+      font-size: 1.3rem;
+      color: var(--dark);
+      font-weight: 600;
+    }
+
+    .copy-modal-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--gray);
+    }
+
+    .copy-modal-body {
+      margin-bottom: 20px;
+    }
+
+    .copy-modal-message {
+      background-color: #f9f9f9;
+      padding: 15px;
+      border-radius: var(--border-radius);
+      border: 1px solid #ddd;
+      white-space: pre-wrap;
+      font-family: monospace;
+      overflow-x: auto;
+    }
+
+    .copy-modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .copy-modal-btn {
+      padding: 10px 20px;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .copy-modal-btn-primary {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+    }
+
+    .copy-modal-btn-primary:hover {
+      background-color: var(--primary-dark);
+    }
+
+    .copy-modal-btn-secondary {
+      background-color: white;
+      color: var(--dark);
+      border: 1px solid var(--gray);
+    }
+
+    .copy-modal-btn-secondary:hover {
+      background-color: #f5f5f5;
+    }
+
+    .copy-success-message {
+      color: var(--primary);
+      margin-top: 10px;
+      text-align: center;
+      font-weight: 600;
+      width: 100%;
+      animation: fadeIn 0.3s;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
     @media (max-width: 768px) {
       .form-section {
         width: 100%;
@@ -509,6 +620,25 @@
 
 
 
+  <!-- Copy Modal -->
+  <div id="copyModal" class="copy-modal">
+    <div class="copy-modal-content">
+      <div class="copy-modal-header">
+        <h3 class="copy-modal-title">Manual WhatsApp Order</h3>
+        <button class="copy-modal-close" onclick="closeCopyModal()">&times;</button>
+      </div>
+      <div class="copy-modal-body">
+        <p>Jika pesan otomatis tidak berfungsi, harap copy teks di bawah dan kirim ulang atau kirim manual ke nomor:</p>
+        <p><strong>082264676214</strong></p>
+        <div id="whatsappMessageContent" class="copy-modal-message"></div>
+      </div>
+      <div class="copy-modal-footer">
+        <button class="copy-modal-btn copy-modal-btn-secondary" onclick="closeCopyModal()">Tutup</button>
+        <button class="copy-modal-btn copy-modal-btn-primary" onclick="copyWhatsAppMessage()">Copy Pesan</button>
+      </div>
+    </div>
+  </div>
+
 
   <script src="js/cartDisplay.js"></script>
   <script>
@@ -517,6 +647,7 @@
       alert('Proceeding to checkout!');
     }
   </script>
+
 </body>
 
 </html>
