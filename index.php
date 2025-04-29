@@ -12,10 +12,15 @@ $category = isset($_GET['category']) ? $_GET['category'] : 'all';
     <title>Nusaibah | Bumbu & Rempah | Herbs & Spices</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Nusaibah adalah produsen bumbu dan rempah terbaik" />
+    <meta name="description" content="Nusaibah merupakan produsen bumbu dan rempah berkualitas yang menghadirkan cita rasa autentik untuk masakan rumahan maupun industri kuliner." />
+    <meta name="keywords" content="Nusaibah, Bumbu, Rempah, Herbs & Spices">
 
     <link rel="stylesheet" href="css/default.css" />
     <link rel="stylesheet" href="css/home.css" />
+
+    <link rel="icon" type="image/x-icon" href="/images/logo.jpg">
+
+
 
     <style>
         .produk-list {
@@ -311,7 +316,7 @@ $category = isset($_GET['category']) ? $_GET['category'] : 'all';
         <div class="container">
             <h1>Nusaibah Bumbu & Rempah</h1>
             <p>
-                Temukan keotentikan rempah-rempah Nusantara bersama Nusaibah. Setiap
+                Temukan keotentikan Bumbu & Rempah Nusantara bersama Nusaibah. Setiap
                 bumbu kami dipilih dan diolah dengan cermat untuk menghadirkan cita
                 rasa tradisional yang memperkaya setiap hidangan. Mulai dari rempah
                 utuh yang mendalam hingga bubuk halus siap pakai, setiap produk kami

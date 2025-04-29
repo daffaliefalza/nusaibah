@@ -29,7 +29,7 @@ $isOutOfStock = $produk['stok'] <= 0;
 <html lang="en">
 
 <head>
-    <title><?= htmlspecialchars($produk['nama_produk']) ?> | Nusaibah</title>
+    <title><?= htmlspecialchars($produk['nama_produk']) ?> | Detail Produk</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="<?= htmlspecialchars($produk['nama_produk']) ?> - <?= htmlspecialchars(substr($produk['deskripsi'], 0, 150)) ?>..." />
